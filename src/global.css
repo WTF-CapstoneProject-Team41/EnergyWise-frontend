@@ -1,0 +1,36 @@
+:root {
+  --primary-color: #09907f;
+  --secondary-color: #f59e0b;
+  --text-primary: #424040;
+  --text-secondary: #000;
+  --text-color: #1e293b;
+  --font-body: "Inter", sans-serif;
+  --font-heading: "DM Sans", sans-serif;
+  --amber-800: #623f04;
+  --teal-800: #066055;
+  --teal-900: #03302a;
+  --success-color: #16a34a;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100vh;
+}
+*,
+::before,
+::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #f8fafb;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  width: 100vw;
+}

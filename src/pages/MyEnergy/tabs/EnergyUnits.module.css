@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  width: 1068px;
+  height: 263px;
+  padding: 32px 32px 32px 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  background: #007365;
+  margin-top: 40px;
+  margin-right: 76px;
+}
+
+/* .balanceCard {
+  display: flex;
+  width: 595px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
+} */
+.frame {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.balanceLabel {
+  color: #ffffff;
+  font-family: "DM Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 19.6px */
+  letter-spacing: 0.42px;
+}
+
+.balanceValue {
+  color: #fff;
+  font-family: "DM Sans";
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 78.4px */
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  /* flex-wrap: wrap; */
+}
+
+.btnAmber {
+  display: flex;
+  height: 52px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--secondary-color);
+  color: var(--text-color);
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 900;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btnAmber:hover {
+  background: rgba(245, 159, 11, 0.664);
+}
+
+.btnOutline {
+  display: flex;
+  height: 52px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 900;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btnOutline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}

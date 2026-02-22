@@ -1,3 +1,6 @@
+.page {
+  width: calc(100%-276px);
+}
 .header {
   display: flex;
   align-items: flex-start;

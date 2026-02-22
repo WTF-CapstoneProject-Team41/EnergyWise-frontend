@@ -95,6 +95,24 @@ function EnergyUnits() {
           We recommend purchasing 50 kWh to maintain your current usage pattern.
         </p>
       </div>
+      <div className={styles.quickPurchase}>
+        <h3 className={styles.sectionTitle}>Quick Purchase</h3>
+        <div className={styles.presets}>
+          <button className={styles.preset}>
+            <span className={styles.presetkWh}>20 kWh</span>
+            <span className={styles.presetPrice}>₦2,200</span>
+          </button>
+          <button className={styles.preset}>
+            <span className={styles.presetkWh}>50 kWh</span>
+            <span className={styles.presetPrice}>₦5,500</span>
+          </button>
+          <button className={styles.preset}>
+            <span className={styles.presetkWh}>100 kWh</span>
+            <span className={styles.presetPrice}>₦11,000</span>
+          </button>
+        </div>
+        <button className={styles.customBtn}>Custom Amount</button>
+      </div>
     </div>
   );
 }

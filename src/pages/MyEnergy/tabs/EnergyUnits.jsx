@@ -1,6 +1,14 @@
+import { useState } from "react";
 import styles from "./EnergyUnits.module.css";
 
+const QUICK_PURCHASE = [
+  { kWh: 20, price: "₦2,200" },
+  { kWh: 50, price: "₦5,500" },
+  { kWh: 100, price: "₦11,000" },
+];
+
 function EnergyUnits() {
+  const [selected, setSelected] = useState(null);
   return (
     <div className={styles.container}>
       <div className={styles.balanceCard}>
@@ -98,18 +106,16 @@ function EnergyUnits() {
       <div className={styles.quickPurchase}>
         <h3 className={styles.sectionTitle}>Quick Purchase</h3>
         <div className={styles.presets}>
-          <button className={styles.preset}>
-            <span className={styles.presetkWh}>20 kWh</span>
-            <span className={styles.presetPrice}>₦2,200</span>
-          </button>
-          <button className={styles.preset}>
-            <span className={styles.presetkWh}>50 kWh</span>
-            <span className={styles.presetPrice}>₦5,500</span>
-          </button>
-          <button className={styles.preset}>
-            <span className={styles.presetkWh}>100 kWh</span>
-            <span className={styles.presetPrice}>₦11,000</span>
-          </button>
+          {QUICK_PURCHASE.map(({ kWh, price }) => (
+            <button
+              key={kWh}
+              onClick={() => setSelected(kWh)}
+              className={`${styles.preset} ${selected === kWh ? styles.presetSelected : ""}`}
+            >
+              <span className={styles.presetkWh}>{kWh} kWh</span>
+              <span className={styles.presetPrice}>{price}</span>
+            </button>
+          ))}
         </div>
         <button className={styles.customBtn}>Custom Amount</button>
       </div>

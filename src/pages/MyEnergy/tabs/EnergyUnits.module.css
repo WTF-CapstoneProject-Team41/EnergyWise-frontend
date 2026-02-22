@@ -195,3 +195,7 @@
   font-size: 16px;
   font-weight: 500;
 }
+.presetSelected {
+  border-color: #1a7a5e;
+  background: #e8f5f1;
+}

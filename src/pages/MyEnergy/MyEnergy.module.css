@@ -1,5 +1,6 @@
 .page {
   width: calc(100%-276px);
+  position: relative;
 }
 .header {
   display: flex;

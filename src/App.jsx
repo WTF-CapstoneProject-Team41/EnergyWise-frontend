@@ -7,9 +7,7 @@ import MyEnergy from "./pages/MyEnergy/MyEnergy";
 function Dashboard() {
   return <h1>Dashboard</h1>;
 }
-// function MyEnergy() {
-//   return <h1>My Energy</h1>;
-// }
+
 function Insights() {
   return <h1>Insights</h1>;
 }

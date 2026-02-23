@@ -1,14 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
+import MyEnergy from "./pages/MyEnergy/MyEnergy";
 
 // Stub pages to be replaced with real components
 function Dashboard() {
   return <h1>Dashboard</h1>;
 }
-function MyEnergy() {
-  return <h1>My Energy</h1>;
-}
+// function MyEnergy() {
+//   return <h1>My Energy</h1>;
+// }
 function Insights() {
   return <h1>Insights</h1>;
 }

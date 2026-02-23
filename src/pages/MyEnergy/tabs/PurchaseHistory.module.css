@@ -42,6 +42,50 @@
 }
 
 .section {
-    display:flex;
-    
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sectionTitle {
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 31px;
+}
+.purchaseItem {
+  display: flex;
+  width: 654px;
+  height: 80px;
+  padding: 0 24px 0 16px;
+  align-items: center;
+  gap: 12px;
+  border-radius: 16px;
+  border: 0.5px solid #a29b97;
+  background: #fff;
+}
+.cardInfo {
+  flex-shrink: 0;
+}
+.purchaseInfo {
+  flex: 1;
+}
+.purchaseDate {
+  color: rgba(0, 0, 0, 0.4);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+}
+.purchaseAmount {
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+}
+.purchaseUnits {
+  color: var(--primary-color);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.42px;
 }

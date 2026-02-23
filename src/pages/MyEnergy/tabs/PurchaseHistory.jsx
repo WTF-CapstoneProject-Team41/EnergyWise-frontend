@@ -4,10 +4,10 @@ import styles from "./PurchaseHistory.module.css";
 const FILTERS = ["Last 7 days", "Last 30 days", "Last 90 days"];
 
 const PURCHASE = [
-  { id: 1, date: "Today, 2:34 PM", ammount: "₦5,500", units: "+50kWh" },
-  { id: 2, date: "Feb 6, 2026", ammount: "₦5,500", units: "+50kWh" },
-  { id: 3, date: "Jan 30, 2026", ammount: "₦5,500", units: "+50kWh" },
-  { id: 4, date: "Jan 30, 2026", ammount: "₦5,500", units: "+50kWh" },
+  { id: 1, date: "Today, 2:34 PM", amount: "₦5,500", units: "+50kWh" },
+  { id: 2, date: "Feb 6, 2026", amount: "₦5,500", units: "+50kWh" },
+  { id: 3, date: "Jan 30, 2026", amount: "₦5,500", units: "+50kWh" },
+  { id: 4, date: "Jan 30, 2026", amount: "₦5,500", units: "+50kWh" },
 ];
 
 function PurchaseHistory() {
@@ -30,12 +30,25 @@ function PurchaseHistory() {
 
         {PURCHASE.map(({ id, date, amount, units }) => (
           <div key={id} className={styles.purchaseItem}>
-            <span>icon</span>
-            <div>
-              <p>{date}</p>
-              <p>{amount}</p>
+            <span className={styles.cardIcon}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="40"
+                height="40"
+                fill="none"
+              >
+                <rect width="40" height="40" fill="#F0FDFA" rx="8" />
+                <path
+                  fill="#F59E0B"
+                  d="M23.75 23a.75.75 0 1 0 0 1.5h3a.75.75 0 1 0 0-1.5h-3ZM9.5 16.25a3.75 3.75 0 0 1 3.75-3.75h13.5a3.75 3.75 0 0 1 3.75 3.75v7.5a3.75 3.75 0 0 1-3.75 3.75h-13.5a3.75 3.75 0 0 1-3.75-3.75v-7.5ZM29 17v-.75A2.25 2.25 0 0 0 26.75 14h-13.5A2.25 2.25 0 0 0 11 16.25V17h18Zm-18 1.5v5.25A2.25 2.25 0 0 0 13.25 26h13.5A2.25 2.25 0 0 0 29 23.75V18.5H11Z"
+                />
+              </svg>
+            </span>
+            <div className={styles.purchaseInfo}>
+              <p className={styles.purchaseDate}>{date}</p>
+              <p className={styles.purchaseAmount}>{amount}</p>
             </div>
-            <span>{units}</span>
+            <span className={styles.purchaseUnits}>{units}</span>
           </div>
         ))}
       </div>

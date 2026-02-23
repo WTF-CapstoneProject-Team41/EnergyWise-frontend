@@ -1,0 +1,155 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.filters {
+  display: flex;
+  width: 408px;
+  height: 59px;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+  margin-top: 17px;
+  background: #ffffff;
+}
+.filterBtn {
+  display: flex;
+  height: 32px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid #a29b97;
+  color: #a29b97;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 500;
+  background: transparent;
+}
+.filterBtn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+.filterActive {
+  border-radius: 8px;
+  border: 1px solid var(--primary-color, #09907f);
+  color: var(--primary-color);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.sectionTitle {
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 31px;
+}
+.purchaseItem {
+  display: flex;
+  width: 654px;
+  height: 80px;
+  padding: 0 24px 0 16px;
+  align-items: center;
+  gap: 12px;
+  border-radius: 16px;
+  border: 0.5px solid #a29b97;
+  background: #fff;
+}
+.cardInfo {
+  flex-shrink: 0;
+}
+.purchaseInfo {
+  flex: 1;
+}
+.purchaseDate {
+  color: rgba(0, 0, 0, 0.4);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+}
+.purchaseAmount {
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+}
+.purchaseUnits {
+  color: var(--primary-color);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.42px;
+}
+
+/* chart */
+.chartSection {
+  width: 824px;
+  height: 352px;
+  background: #ffffff;
+  border-radius: 16px;
+}
+
+.chartHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 32px;
+  margin-right: 24px;
+  margin-left: 40px;
+}
+
+.chartTitle {
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.chartFilters {
+  display: flex;
+  height: 29px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  border-radius: 8px;
+  background: #f5f8fa;
+}
+
+.chartFilterBtn {
+  display: flex;
+  width: 54px;
+  height: 24px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.chartFilterActive {
+  display: flex;
+  width: 56px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--primary-color);
+}

@@ -40,3 +40,8 @@
   border: 1px solid var(--primary-color, #09907f);
   color: var(--primary-color);
 }
+
+.section {
+    display:flex;
+    
+}

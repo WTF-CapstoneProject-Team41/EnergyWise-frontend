@@ -302,3 +302,44 @@
   color: #000;
   font-family: var(--font-body);
 }
+.tableSection {
+  /* width: 1136px;
+  height: 473px; */
+  border-radius: 24px;
+  border: 0.5px solid #505050;
+  background: #fff;
+}
+
+/* appliance table */
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 21px 49px 40px;
+}
+.tableTitle {
+  color: #272727;
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 700;
+}
+.addNewBtn {
+  display: flex;
+  width: 116px;
+  height: 38px;
+  border: none;
+  padding: 24px 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.addNewBtn:hover {
+  background: #155f4a;
+}

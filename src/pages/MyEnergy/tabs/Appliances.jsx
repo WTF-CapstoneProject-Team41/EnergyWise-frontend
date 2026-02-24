@@ -143,14 +143,14 @@ function Appliances() {
               <p className={styles.totalSub}>Across 5 appliances</p>
             </div>
             <div className={styles.chartRow}>
-              <ResponsiveContainer width={160} height={160}>
+              <ResponsiveContainer width={225} height={225}>
                 <PieChart>
                   <Pie
                     data={DONUT_DATA}
                     cx="50%"
                     cy="50%"
                     innerRadius={52}
-                    outerRadius={76}
+                    outerRadius={90}
                     dataKey="value"
                     labelLine={false}
                   >
@@ -161,6 +161,22 @@ function Appliances() {
                   <Tooltip formatter={(v) => `${v}%`} />
                 </PieChart>
               </ResponsiveContainer>
+              <div className={styles.legend}>
+                {DONUT_DATA.map(({ name, value, color }) => (
+                  <div key={name} className={styles.legendItem}>
+                    <div className={styles.legendLeft}>
+                      <span
+                        className={styles.legendDot}
+                        style={{ background: color }}
+                      />
+                      <span className={styles.legendName}>{name}</span>
+                    </div>
+                    <div>
+                      <span className={styles.legendPct}>{value}%</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

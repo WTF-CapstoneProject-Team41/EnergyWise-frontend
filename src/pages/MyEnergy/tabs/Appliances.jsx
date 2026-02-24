@@ -107,7 +107,23 @@ function Appliances() {
             </button>
           </div>
         </div>
-        <div style={{ background: "#ffffff", borderRadius: 16, height: 200 }} />
+        {/* right card */}
+        <div className={styles.breakdown}>
+          <div className={styles.containerTop}>
+            <div>
+              <h3 className={styles.breakdownTitle}>Consumption Breakdown</h3>
+              <p className={styles.breakdownSubtitle}>
+                How your energy is distributed
+              </p>
+            </div>
+            <div>
+              <p className={styles.totalLabel}>Total Daily Consumption</p>
+              <p className={styles.totalValue}>20 kWh</p>
+
+              <p className={styles.totalSub}>Across 5 appliances</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

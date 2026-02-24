@@ -1,4 +1,24 @@
 import styles from "./Appliances.module.css";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+
+const DONUT_DATA = [
+  { name: "Air Conditioner", value: 60, color: "#10b981" },
+  { name: "Refrigerator", value: 18, color: "#F59E0B" },
+  { name: "Others", value: 22, color: "#E2E8F0" },
+];
+
+function DonutLabel() {
+  return (
+    <text x="50%" y="50%" textAnchor="middle" dominantBaseline="middle">
+      <tspan x="50%" dy="-6" fontSize="22" fontWeight="800" fill="#1a1f1e">
+        5
+      </tspan>
+      <tspan x="50%" dy="20" fontSize="11" fill="#6b7c78">
+        Appliances
+      </tspan>
+    </text>
+  );
+}
 
 function Appliances() {
   return (
@@ -121,6 +141,26 @@ function Appliances() {
               <p className={styles.totalValue}>20 kWh</p>
 
               <p className={styles.totalSub}>Across 5 appliances</p>
+            </div>
+            <div className={styles.chartRow}>
+              <ResponsiveContainer width={160} height={160}>
+                <PieChart>
+                  <Pie
+                    data={DONUT_DATA}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={52}
+                    outerRadius={76}
+                    dataKey="value"
+                    labelLine={false}
+                  >
+                    {DONUT_DATA.map((entry, i) => (
+                      <Cell key={i} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip formatter={(v) => `${v}%`} />
+                </PieChart>
+              </ResponsiveContainer>
             </div>
           </div>
         </div>

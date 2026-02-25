@@ -343,3 +343,129 @@
 .addNewBtn:hover {
   background: #155f4a;
 }
+
+.tableWrapper {
+  width: 100%;
+}
+
+/* Shared grid structure for header + rows */
+.row {
+  display: grid;
+  grid-template-columns:
+    1.3fr /* Appliance */
+    1.3fr /* Specs */
+    1fr /* Usage */
+    1fr /* Contribution */
+    1fr /* Cost */
+    1fr; /* Actions */
+
+  align-items: center;
+  gap: 56px;
+  padding: 16px 0;
+  margin-left: 30px;
+  min-width: 927px;
+}
+
+/* Header styling */
+.headerRow {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #62738e;
+  margin-left: 38px;
+}
+
+.applianceCell {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.textBlock {
+  min-width: 0;
+}
+.applianceName {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.applianceLocation {
+  color: #62738e;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.applianceName,
+.applianceLocation {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.specs {
+  color: #62738e;
+  font-size: 14px;
+  font-weight: 500;
+}
+.usage {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.48px;
+}
+.contributionBadge {
+  display: flex;
+  width: 50px;
+  height: 27px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--Teal-green-100, #cffcf6);
+  color: var(--primary-color);
+  font-size: 12px;
+}
+.dailyCost {
+  color: #62738e;
+  font-family: Inter;
+  font-size: 14px;
+
+  font-weight: 600;
+}
+.actionBtns {
+  display: flex;
+  gap: 8px;
+}
+.editBtn,
+.deleteBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.editBtn {
+  background: #e8f5f1;
+  color: #1a7a5e;
+}
+.editBtn:hover {
+  background: #d0ede6;
+}
+.deleteBtn {
+  background: #fdf0f0;
+  color: #e05252;
+}
+.deleteBtn:hover {
+  background: #fad9d9;
+}

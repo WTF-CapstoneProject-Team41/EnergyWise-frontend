@@ -21,8 +21,8 @@ function ApplianceIcon() {
       <path
         d="M29.25 3.25C30.9069 3.25 32.25 4.59315 32.25 6.25V31.7334C32.25 33.3902 30.9068 34.7334 29.25 34.7334H10.7588C9.10196 34.7334 7.75882 33.3902 7.75879 31.7334V6.25C7.75879 4.59315 9.10193 3.25 10.7588 3.25H29.25Z"
         stroke="#F59E0B"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <mask
         id="path-2-outside-1_99_3428"
@@ -334,62 +334,55 @@ function Appliances() {
           <h3 className={styles.tableTitle}>All Appliances</h3>
           <button className={styles.addNewBtn}>+ Add New</button>
         </div>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Appliance</th>
-              <th>Specifications</th>
-              <th>Daily Usage</th>
-              <th>Contribution</th>
-              <th>Daily Cost</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {appliances.map(
-              ({ id, appl, location, specs, usage, contribution, cost }) => (
-                <tr key={id}>
-                  <td>
-                    <div className={styles.applianceCell}>
-                      <div className={styles.applianceIcon}>
-                        <ApplianceIcon />
-                      </div>
-                      <div>
-                        <p className={styles.applianceName}>{appl}</p>
-                        <p className={styles.applianceLocation}>{location}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <span className={styles.specs}>{specs}</span>
-                  </td>
-                  <td>
-                    <span className={styles.usage}>{usage}</span>
-                  </td>
-                  <td>
-                    <span className={styles.contributionBadge}>
-                      {contribution}%
-                    </span>
-                  </td>
-                  <td>{cost}</td>
-                  <td>
-                    <div className={styles.actionBtns}>
-                      <button className={styles.editBtn}>
-                        <EditIcon />
-                      </button>
-                      <button
-                        className={styles.deleteBtn}
-                        onClick={() => handleDelete(id)}
-                      >
-                        <DeleteIcon />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ),
-            )}
-          </tbody>
-        </table>
+        <div className={styles.tableWrapper}>
+          {/* Header Row */}
+          <div className={`${styles.row} ${styles.headerRow}`}>
+            <div>Appliance</div>
+            <div>Specifications</div>
+            <div>Daily Usage</div>
+            <div>Contribution</div>
+            <div>Daily Cost</div>
+            <div>Actions</div>
+          </div>
+
+          {/* Data Rows */}
+          {appliances.map(
+            ({ id, appl, location, specs, usage, contribution, cost }) => (
+              <div key={id} className={styles.row}>
+                <div className={styles.applianceCell}>
+                  <div className={styles.applianceIcon}>
+                    <ApplianceIcon />
+                  </div>
+                  <div className={styles.textBlock}>
+                    <p className={styles.applianceName}>{appl}</p>
+                    <p className={styles.applianceLocation}>{location}</p>
+                  </div>
+                </div>
+
+                <div className={styles.specs}>{specs}</div>
+                <div className={styles.usage}>{usage}</div>
+                <div>
+                  <span className={styles.contributionBadge}>
+                    {contribution}%
+                  </span>
+                </div>
+                <div className={styles.dailyCost}>{cost}</div>
+
+                <div className={styles.actionBtns}>
+                  <button className={styles.editBtn}>
+                    <EditIcon />
+                  </button>
+                  <button
+                    className={styles.deleteBtn}
+                    onClick={() => handleDelete(id)}
+                  >
+                    <DeleteIcon />
+                  </button>
+                </div>
+              </div>
+            ),
+          )}
+        </div>
       </div>
     </div>
   );

@@ -79,7 +79,7 @@ function BuyEnergyForm({ variant }) {
   };
   return (
     <div>
-      <p className={styles.formHeading}>Buy Energy</p>
+      {/* <p className={styles.formHeading}>Buy Energy</p> */}
       <div className={styles.form}>
         {/* balance card----dashboard only */}
         {variant === "dashboard" && (

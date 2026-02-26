@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./BuyEnergyForm.module.css";
 
 const PRESETS = [
@@ -7,16 +8,18 @@ const PRESETS = [
   { kwh: 75, price: 8250 },
   { kwh: 100, price: 11050 },
 ];
-const FALLBACK_RATE = 110;
-function formatNaira(amount) {
-  return "₦" + amount.toLocaleString("en-NG");
-}
 
 const PAYMENT_METHODS = [
   { id: "card", pname: "Card", sub: "Debit or Credit" },
   { id: "bank_transfer", pname: "Bank Transfer", sub: "Direct Transfer" },
   { id: "mobile_money", pname: "Mobile Money", sub: "Wallet payment" },
 ];
+
+const FALLBACK_RATE = 110;
+
+function formatNaira(amount) {
+  return "₦" + amount.toLocaleString("en-NG");
+}
 
 function CardIcon() {
   return (
@@ -31,6 +34,8 @@ function CardIcon() {
 }
 
 function BuyEnergyForm({ variant }) {
+  const navigate = useNavigate();
+
   const [selectedKwh, setSelectedKwh] = useState(null);
   const [customKwh, setCustomKwh] = useState("");
   const [paymentMethod, setPaymentMethod] = useState(null);
@@ -60,6 +65,18 @@ function BuyEnergyForm({ variant }) {
     setSelectedKwh(null);
   };
 
+  const handleCancel = () => {
+    if (variant === "onboarding") {
+      navigate("/dashboard");
+    } else {
+      navigate("/my-energy");
+    }
+  };
+
+  const handleContinue = () => {
+    // Paystack will be wired here
+    navigate("/payment-success");
+  };
   return (
     <div>
       <p className={styles.formHeading}>Buy Energy</p>
@@ -74,6 +91,8 @@ function BuyEnergyForm({ variant }) {
             <p className={styles.balanceCardSub}>Lasts approximately 6 days</p>
           </div>
         )}
+
+        {/* Preset amounts */}
         <div>
           <p className={styles.sectionTitle}>Select Amount</p>
           <div className={styles.presets}>
@@ -128,6 +147,39 @@ function BuyEnergyForm({ variant }) {
               </button>
             ))}
           </div>
+        </div>
+        {/* Order summary */}
+        <div className={styles.orderSummary}>
+          <p className={styles.orderTitle}>Order Summary</p>
+          <div className={styles.orderRow}>
+            <span>Energy Units</span>
+            <span>{activeKwh > 0 ? `${activeKwh} kWh` : "—"}</span>
+          </div>
+          <div className={styles.orderRow}>
+            <span>Rate</span>
+            <span>₦{rate}/kWh</span>
+          </div>
+          <hr className={styles.orderDivider} />
+          <div className={styles.orderTotal}>
+            <span>Total Amount</span>
+            <span className={styles.orderTotalAmount}>
+              {activeKwh > 0 ? formatNaira(totalAmount) : "—"}
+            </span>
+          </div>
+        </div>
+
+        {/* Actions */}
+        <div className={styles.actions}>
+          <button className={styles.cancelBtn} onClick={handleCancel}>
+            Cancel
+          </button>
+          <button
+            className={styles.continueBtn}
+            onClick={handleContinue}
+            disabled={!canContinue}
+          >
+            {variant === "onboarding" ? "Continue to Payment" : "Continue"}
+          </button>
         </div>
       </div>
     </div>

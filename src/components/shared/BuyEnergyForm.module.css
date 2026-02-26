@@ -232,3 +232,116 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* -- Order summary -- */
+.orderSummary {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  max-width: 514px;
+  /* padding-left: 24px; */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 41px;
+  margin-bottom: 56px;
+}
+
+.orderTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 24px;
+  margin-top: 31px;
+  margin-left: 24px;
+}
+
+.orderRow {
+  display: flex;
+  justify-content: space-between;
+  width: 466px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+  margin: 0 24px;
+}
+
+.orderDivider {
+  border: none;
+  border-top: 1px solid #4240404f;
+  margin: 4px 0;
+}
+
+.orderTotal {
+  display: flex;
+  margin: 0px 16px 24px 24px;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000;
+}
+
+.orderTotalAmount {
+  color: var(--primary-color);
+  font-size: 20px;
+}
+
+/* -- Action buttons -- */
+.actions {
+  display: flex;
+  gap: 24px;
+  justify-content: flex-end;
+  margin-right: 45px;
+  margin-bottom: 114px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.cancelBtn {
+  display: flex;
+  width: 136px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: transparent;
+  border: 2px solid #a29b97;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #a29b97;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.cancelBtn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.continueBtn {
+  display: flex;
+  padding: 8px;
+  width: 243px;
+  gap: 8px;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    opacity 0.15s;
+}
+
+.continueBtn:hover:not(:disabled) {
+  background: #155f4a;
+}
+
+.continueBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

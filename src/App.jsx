@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Layout from "./components/Layout/Layout";
 import Sidebar from "./components/Sidebar/Sidebar";
 import MyEnergy from "./pages/MyEnergy/MyEnergy";
 import BuyEnergy from "./pages/BuyEnergy/BuyEnergy";
@@ -23,24 +24,25 @@ function Account() {
 function App() {
   return (
     <BrowserRouter>
-      <div className="app">
-        <Sidebar />
-        <main className="content">
-          <Routes>
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/my-energy" element={<MyEnergy />} />
-            <Route path="/insights" element={<Insights />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/buy-energy" element={<BuyEnergy />} />
-            <Route
-              path="/onboarding/buy-energy"
-              element={<BuyEnergyOnboarding />}
-            />
-            <Route path="*" element={<Dashboard />} />
-          </Routes>
-        </main>
-      </div>
+      <Routes>
+        <Route
+          path="/onboarding/buy-energy"
+          element={<BuyEnergyOnboarding />}
+        />
+        <Route element={<Layout />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/my-energy" element={<MyEnergy />} />
+          <Route path="/insights" element={<Insights />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/buy-energy" element={<BuyEnergy />} />
+          <Route
+            path="/onboarding/buy-energy"
+            element={<BuyEnergyOnboarding />}
+          />
+        </Route>
+        <Route path="*" element={<Dashboard />} />
+      </Routes>
     </BrowserRouter>
   );
 }

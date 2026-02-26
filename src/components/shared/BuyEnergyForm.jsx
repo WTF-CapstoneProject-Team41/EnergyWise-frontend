@@ -78,109 +78,106 @@ function BuyEnergyForm({ variant }) {
     navigate("/payment-success");
   };
   return (
-    <div>
-      {/* <p className={styles.formHeading}>Buy Energy</p> */}
-      <div className={styles.form}>
-        {/* balance card----dashboard only */}
-        {variant === "dashboard" && (
-          <div className={styles.balanceCard}>
-            <p className={styles.balanceCardLabel}>Current Balance</p>
-            <p className={styles.balanceCardValue}>
-              45.2<span>kWh</span>
+    <div className={styles.form}>
+      {/* balance card----dashboard only */}
+      {variant === "dashboard" && (
+        <div className={styles.balanceCard}>
+          <p className={styles.balanceCardLabel}>Current Balance</p>
+          <p className={styles.balanceCardValue}>
+            45.2<span>kWh</span>
+          </p>
+          <p className={styles.balanceCardSub}>Lasts approximately 6 days</p>
+        </div>
+      )}
+
+      {/* Preset amounts */}
+      <div>
+        <p className={styles.sectionTitle}>Select Amount</p>
+        <div className={styles.presets}>
+          {PRESETS.map(({ kwh, price }) => (
+            <button
+              key={kwh}
+              onClick={() => handlePresetClick(kwh)}
+              className={`${styles.preset} ${selectedKwh === kwh ? styles.presetSelected : ""}`}
+            >
+              <span className={styles.presetKwh}>{kwh}</span>
+              <span className={styles.presetPrice}>{formatNaira(price)}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      {/* custom amount */}
+      <div className={styles.customSection}>
+        <div className={styles.subSection}>
+          <p className={styles.customLabel}>Custom Amount</p>
+          <div className={styles.customInputRow}>
+            <input
+              type="number"
+              min="1"
+              placeholder="Enter amount"
+              value={customKwh}
+              onChange={handleCustomChange}
+              className={styles.customInput}
+            />
+          </div>
+          {activeKwh > 0 && (
+            <p className={styles.customHint}>
+              Approximately <strong>{formatNaira(totalAmount)}</strong> at ₦
+              {rate}/kWh
             </p>
-            <p className={styles.balanceCardSub}>Lasts approximately 6 days</p>
-          </div>
-        )}
+          )}
+        </div>
+        <span className={styles.customUnit}>kWh</span>
+      </div>
+      {/* Payment method */}
+      <div>
+        <p className={styles.sectionTitle}>Payment Method</p>
+        <div className={styles.paymentMethods}>
+          {PAYMENT_METHODS.map(({ id, pname, sub }) => (
+            <button
+              key={id}
+              onClick={() => setPaymentMethod(id)}
+              className={`${styles.paymentMethod} ${paymentMethod === id ? styles.paymentMethodSelected : ""}`}
+            >
+              <CardIcon />
+              <span className={styles.paymentName}>{pname}</span>
+              <span className={styles.paymentSub}>{sub}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      {/* Order summary */}
+      <div className={styles.orderSummary}>
+        <p className={styles.orderTitle}>Order Summary</p>
+        <div className={styles.orderRow}>
+          <span>Energy Units</span>
+          <span>{activeKwh > 0 ? `${activeKwh} kWh` : "—"}</span>
+        </div>
+        <div className={styles.orderRow}>
+          <span>Rate</span>
+          <span>₦{rate}/kWh</span>
+        </div>
+        <hr className={styles.orderDivider} />
+        <div className={styles.orderTotal}>
+          <span>Total Amount</span>
+          <span className={styles.orderTotalAmount}>
+            {activeKwh > 0 ? formatNaira(totalAmount) : "—"}
+          </span>
+        </div>
+      </div>
 
-        {/* Preset amounts */}
-        <div>
-          <p className={styles.sectionTitle}>Select Amount</p>
-          <div className={styles.presets}>
-            {PRESETS.map(({ kwh, price }) => (
-              <button
-                key={kwh}
-                onClick={() => handlePresetClick(kwh)}
-                className={`${styles.preset} ${selectedKwh === kwh ? styles.presetSelected : ""}`}
-              >
-                <span className={styles.presetKwh}>{kwh}</span>
-                <span className={styles.presetPrice}>{formatNaira(price)}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-        {/* custom amount */}
-        <div className={styles.customSection}>
-          <div className={styles.subSection}>
-            <p className={styles.customLabel}>Custom Amount</p>
-            <div className={styles.customInputRow}>
-              <input
-                type="number"
-                min="1"
-                placeholder="Enter amount"
-                value={customKwh}
-                onChange={handleCustomChange}
-                className={styles.customInput}
-              />
-            </div>
-            {activeKwh > 0 && (
-              <p className={styles.customHint}>
-                Approximately <strong>{formatNaira(totalAmount)}</strong> at ₦
-                {rate}/kWh
-              </p>
-            )}
-          </div>
-          <span className={styles.customUnit}>kWh</span>
-        </div>
-        {/* Payment method */}
-        <div>
-          <p className={styles.sectionTitle}>Payment Method</p>
-          <div className={styles.paymentMethods}>
-            {PAYMENT_METHODS.map(({ id, pname, sub }) => (
-              <button
-                key={id}
-                onClick={() => setPaymentMethod(id)}
-                className={`${styles.paymentMethod} ${paymentMethod === id ? styles.paymentMethodSelected : ""}`}
-              >
-                <CardIcon />
-                <span className={styles.paymentName}>{pname}</span>
-                <span className={styles.paymentSub}>{sub}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-        {/* Order summary */}
-        <div className={styles.orderSummary}>
-          <p className={styles.orderTitle}>Order Summary</p>
-          <div className={styles.orderRow}>
-            <span>Energy Units</span>
-            <span>{activeKwh > 0 ? `${activeKwh} kWh` : "—"}</span>
-          </div>
-          <div className={styles.orderRow}>
-            <span>Rate</span>
-            <span>₦{rate}/kWh</span>
-          </div>
-          <hr className={styles.orderDivider} />
-          <div className={styles.orderTotal}>
-            <span>Total Amount</span>
-            <span className={styles.orderTotalAmount}>
-              {activeKwh > 0 ? formatNaira(totalAmount) : "—"}
-            </span>
-          </div>
-        </div>
-
-        {/* Actions */}
-        <div className={styles.actions}>
-          <button className={styles.cancelBtn} onClick={handleCancel}>
-            Cancel
-          </button>
-          <button
-            className={styles.continueBtn}
-            onClick={handleContinue}
-            disabled={!canContinue}
-          >
-            {variant === "onboarding" ? "Continue to Payment" : "Continue"}
-          </button>
-        </div>
+      {/* Actions */}
+      <div className={styles.actions}>
+        <button className={styles.cancelBtn} onClick={handleCancel}>
+          Cancel
+        </button>
+        <button
+          className={styles.continueBtn}
+          onClick={handleContinue}
+          disabled={!canContinue}
+        >
+          {variant === "onboarding" ? "Continue to Payment" : "Continue"}
+        </button>
       </div>
     </div>
   );

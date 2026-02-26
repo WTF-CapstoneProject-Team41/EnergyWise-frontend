@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   /* gap: 32px; */
-  width: 758px;
+  max-width: 758px;
   background: #fff;
   font-family: var(--font-body);
 }

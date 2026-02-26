@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./EnergyUnits.module.css";
 
 const QUICK_PURCHASE = [
@@ -9,6 +10,7 @@ const QUICK_PURCHASE = [
 
 function EnergyUnits() {
   const [selected, setSelected] = useState(null);
+  const navigate = useNavigate();
   return (
     <div className={styles.container}>
       <div className={styles.balanceCard}>
@@ -20,7 +22,10 @@ function EnergyUnits() {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.btnAmber}>
+          <button
+            className={styles.btnAmber}
+            onClick={() => navigate("/buy-energy")}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -54,7 +59,10 @@ function EnergyUnits() {
 
             <span>Send Energy</span>
           </button>
-          <button className={styles.btnOutline}>
+          <button
+            className={styles.btnOutline}
+            onClick={() => navigate("/log-purchase")}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

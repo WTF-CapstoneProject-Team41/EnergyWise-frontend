@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Appliances.module.css";
 import { PieChart, Pie, Tooltip, ResponsiveContainer } from "recharts";
 
@@ -168,6 +169,7 @@ function DonutLabel() {
 
 function Appliances() {
   const [appliances, setAppliances] = useState(INITIAL_APPLIANCES);
+  const navigate = useNavigate();
 
   const handleDelete = (id) => {
     setAppliances((prev) => prev.filter((a) => a.id !== id));
@@ -222,6 +224,7 @@ function Appliances() {
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
+                onClick={() => navigate("/buy-energy")}
                 height="24"
                 fill="none"
               >
@@ -252,7 +255,10 @@ function Appliances() {
 
               <span>Send Energy</span>
             </button>
-            <button className={styles.btnOutline}>
+            <button
+              className={styles.btnOutline}
+              onClick={() => navigate("/log-purchase")}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

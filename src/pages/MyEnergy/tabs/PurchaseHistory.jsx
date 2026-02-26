@@ -1,11 +1,12 @@
 import { useState } from "react";
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  Dot,
 } from "recharts";
 import styles from "./PurchaseHistory.module.css";
 
@@ -56,6 +57,24 @@ function PurchaseHistory() {
   const [activeChartFilter, setActiveChartFilter] = useState("Week");
   return (
     <div className={styles.container}>
+      <div className={styles.topBar}>
+        <div className={styles.searchBox}>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15.5 14H14.71L14.43 13.73C15.444 12.5541 16.0012 11.0527 16 9.5C16 8.21442 15.6188 6.95772 14.9046 5.8888C14.1903 4.81988 13.1752 3.98676 11.9874 3.49479C10.7997 3.00282 9.49279 2.87409 8.23192 3.1249C6.97104 3.3757 5.81285 3.99477 4.90381 4.90381C3.99477 5.81285 3.3757 6.97104 3.1249 8.23192C2.87409 9.49279 3.00282 10.7997 3.49479 11.9874C3.98676 13.1752 4.81988 14.1903 5.8888 14.9046C6.95772 15.6188 8.21442 16 9.5 16C11.11 16 12.59 15.41 13.73 14.43L14 14.71V15.5L19 20.49L20.49 19L15.5 14ZM9.5 14C7.01 14 5 11.99 5 9.5C5 7.01 7.01 5 9.5 5C11.99 5 14 7.01 14 9.5C14 11.99 11.99 14 9.5 14Z"
+              fill="#09907F"
+            />
+          </svg>
+
+          <input placeholder="Search history..." />
+        </div>
+      </div>
       <div className={styles.filters}>
         {FILTERS.map((filter) => (
           <button
@@ -113,23 +132,49 @@ function PurchaseHistory() {
         </div>
         {/* Responsive container--chart */}
         <div
-          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            marginTop: "20px",
+          }}
         >
-          <ResponsiveContainer width="70%" height={260}>
-            <BarChart data={CHART_DATA[activeChartFilter]} barSize={30}>
+          <ResponsiveContainer width="80%" height={220}>
+            <LineChart data={CHART_DATA[activeChartFilter]}>
               <XAxis
                 dataKey="label"
+                axisLine={{ stroke: "#8d9290ff" }}
+                tickLine={false}
+                tick={{ fontSize: 12, fill: "#000", fontWeight: 600 }}
+              />
+              <YAxis
                 axisLine={false}
                 tickLine={false}
                 tick={{ fontSize: 12, fill: "#000", fontWeight: 600 }}
               />
-              <YAxis hide />
               <Tooltip
-                cursor={{ fill: "#f0faf6" }}
+                cursor={{ stroke: "#8d9290ff", strokeWidth: 1 }}
                 formatter={(value) => [`${value} kWh`, "Usage"]}
               />
-              <Bar dataKey="kwh" fill="#09907F" />
-            </BarChart>
+              <Line
+                type="linear"
+                dataKey="kwh"
+                stroke="#066055"
+                strokeWidth={2.5}
+                dot={{
+                  fill: "#ffffff",
+                  stroke: "#066055",
+                  strokeWidth: 2,
+                  r: 5,
+                }}
+                activeDot={{
+                  fill: "#066055",
+                  stroke: "#ffffff",
+                  strokeWidth: 2,
+                  r: 6,
+                }}
+              />
+            </LineChart>
           </ResponsiveContainer>
         </div>
       </div>

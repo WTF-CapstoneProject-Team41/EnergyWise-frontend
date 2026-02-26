@@ -71,6 +71,29 @@ function BuyEnergyForm({ variant }) {
             ))}
           </div>
         </div>
+        {/* custom amount */}
+        <div className={styles.customSection}>
+          <div className={styles.subSection}>
+            <p className={styles.customLabel}>Custom Amount</p>
+            <div className={styles.customInputRow}>
+              <input
+                type="number"
+                min="1"
+                placeholder="Enter amount"
+                value={customKwh}
+                onChange={handleCustomChange}
+                className={styles.customInput}
+              />
+            </div>
+            {activeKwh > 0 && (
+              <p className={styles.customHint}>
+                Approximately <strong>{formatNaira(totalAmount)}</strong> at ₦
+                {rate}/kWh
+              </p>
+            )}
+          </div>
+          <span className={styles.customUnit}>kWh</span>
+        </div>
       </div>
     </div>
   );

@@ -9,7 +9,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  /* gap: 32px; */
   width: 758px;
   background: #fff;
   font-family: var(--font-body);
@@ -22,7 +22,7 @@
   padding: 33px 359px 32px 48px;
   color: #ffffff;
   box-shadow: 0 4px 4px 8px rgba(19, 123, 111, 0.24);
-  margin: 48px 70px 0 40px;
+  margin: 48px 70px 32px 40px;
 }
 
 .balanceCardLabel {
@@ -62,7 +62,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  width: 520px;
+  max-width: 520px;
   margin-left: 72px;
   margin-bottom: 24px;
 }
@@ -111,4 +111,68 @@
   .presets {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* -- Custom amount -- */
+.customSection {
+  display: flex;
+  gap: 72px;
+  padding: 0 16px;
+  align-items: center;
+  width: 509px;
+  height: 155px;
+  margin-left: 40px;
+}
+.subSection {
+  display: flex;
+  width: 342px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.customLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+}
+
+.customInputRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.customInput {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #b7b1ac;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 120%;
+  color: #000;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.customInput:focus {
+  border-color: #1a7a5e;
+}
+
+.customUnit {
+  font-size: 12px;
+  color: #817e7e;
+  font-weight: 700;
+}
+
+.customHint {
+  font-size: 12px;
+  color: #b7b1ac;
+}
+
+.customHint strong {
+  color: var(--primary-color);
+  font-weight: 700;
 }

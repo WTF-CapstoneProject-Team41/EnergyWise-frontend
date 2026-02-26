@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Sidebar from "./components/Sidebar/Sidebar";
 import MyEnergy from "./pages/MyEnergy/MyEnergy";
+import BuyEnergy from "./pages/BuyEnergy/BuyEnergy";
 
 // Stub pages to be replaced with real components
 function Dashboard() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="/insights" element={<Insights />} />
             <Route path="/services" element={<Services />} />
             <Route path="/account" element={<Account />} />
+            <Route path="/buy-energy" element={<BuyEnergy />} />
             <Route path="*" element={<Dashboard />} />
           </Routes>
         </main>

@@ -1,0 +1,114 @@
+.formHeading {
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 600;
+  padding: 0 5px;
+  margin-bottom: 9px;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 758px;
+  background: #fff;
+  font-family: var(--font-body);
+}
+
+/* -- Balance card (dashboard only) -- */
+.balanceCard {
+  background: #137b6f;
+  border-radius: 24px;
+  padding: 33px 359px 32px 48px;
+  color: #ffffff;
+  box-shadow: 0 4px 4px 8px rgba(19, 123, 111, 0.24);
+  margin: 48px 70px 0 40px;
+}
+
+.balanceCardLabel {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.balanceCardValue {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 8px;
+}
+
+.balanceCardValue span {
+  font-weight: 600;
+}
+
+.balanceCardSub {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/*  Section title  */
+.sectionTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin-left: 45px;
+  margin-bottom: 24px;
+}
+
+/*  Preset grid  */
+.presets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 520px;
+  margin-left: 72px;
+  margin-bottom: 24px;
+}
+
+.preset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 136px;
+  gap: 16px;
+  padding: 0 8px;
+  border: 1px solid var(--Teal-green-100, #cffcf6);
+  background: var(--Blue-50, #f5f9ff);
+  background: #f8fafa;
+  border-radius: 16px;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+
+.preset:hover {
+  border-color: #1a7a5e;
+  background: #f0faf6;
+}
+
+.presetSelected {
+  border-color: #1a7a5e;
+  background: #e8f5f1;
+}
+
+.presetKwh {
+  font-size: 32px;
+  font-weight: 600;
+  color: #000;
+}
+
+.presetPrice {
+  font-size: 14px;
+  color: #62738e;
+  font-weight: 600;
+}
+
+@media (max-width: 500px) {
+  .presets {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

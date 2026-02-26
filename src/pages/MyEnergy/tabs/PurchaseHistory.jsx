@@ -1,11 +1,12 @@
 import { useState } from "react";
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   Tooltip,
   ResponsiveContainer,
+  Dot,
 } from "recharts";
 import styles from "./PurchaseHistory.module.css";
 
@@ -131,23 +132,49 @@ function PurchaseHistory() {
         </div>
         {/* Responsive container--chart */}
         <div
-          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            marginTop: "20px",
+          }}
         >
-          <ResponsiveContainer width="70%" height={260}>
-            <BarChart data={CHART_DATA[activeChartFilter]} barSize={30}>
+          <ResponsiveContainer width="80%" height={220}>
+            <LineChart data={CHART_DATA[activeChartFilter]}>
               <XAxis
                 dataKey="label"
+                axisLine={{ stroke: "#8d9290ff" }}
+                tickLine={false}
+                tick={{ fontSize: 12, fill: "#000", fontWeight: 600 }}
+              />
+              <YAxis
                 axisLine={false}
                 tickLine={false}
                 tick={{ fontSize: 12, fill: "#000", fontWeight: 600 }}
               />
-              <YAxis hide />
               <Tooltip
-                cursor={{ fill: "#f0faf6" }}
+                cursor={{ stroke: "#8d9290ff", strokeWidth: 1 }}
                 formatter={(value) => [`${value} kWh`, "Usage"]}
               />
-              <Bar dataKey="kwh" fill="#09907F" />
-            </BarChart>
+              <Line
+                type="linear"
+                dataKey="kwh"
+                stroke="#066055"
+                strokeWidth={2.5}
+                dot={{
+                  fill: "#ffffff",
+                  stroke: "#066055",
+                  strokeWidth: 2,
+                  r: 5,
+                }}
+                activeDot={{
+                  fill: "#066055",
+                  stroke: "#ffffff",
+                  strokeWidth: 2,
+                  r: 6,
+                }}
+              />
+            </LineChart>
           </ResponsiveContainer>
         </div>
       </div>

@@ -273,7 +273,6 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 10px;
-  /* border-bottom: 1px solid #f0f4f3; */
 }
 
 .legendLeft {
@@ -303,8 +302,6 @@
   font-family: var(--font-body);
 }
 .tableSection {
-  /* width: 1136px;
-  height: 473px; */
   border-radius: 24px;
   border: 0.5px solid #505050;
   background: #fff;
@@ -352,12 +349,12 @@
 .row {
   display: grid;
   grid-template-columns:
-    1.3fr /* Appliance */
-    1.3fr /* Specs */
-    1fr /* Usage */
-    1fr /* Contribution */
-    1fr /* Cost */
-    1fr; /* Actions */
+    1.3fr
+    1.3fr
+    1fr
+    1fr
+    1fr
+    1fr;
 
   align-items: center;
   gap: 56px;

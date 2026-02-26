@@ -12,6 +12,24 @@ function formatNaira(amount) {
   return "₦" + amount.toLocaleString("en-NG");
 }
 
+const PAYMENT_METHODS = [
+  { id: "card", pname: "Card", sub: "Debit or Credit" },
+  { id: "bank_transfer", pname: "Bank Transfer", sub: "Direct Transfer" },
+  { id: "mobile_money", pname: "Mobile Money", sub: "Wallet payment" },
+];
+
+function CardIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none">
+      <path
+        fill="#f59e0b"
+        d="M49 10.5H7A3.5 3.5 0 0 0 3.5 14v28A3.5 3.5 0 0 0 7 45.5h42a3.5 3.5 0 0 0 3.5-3.5V14a3.5 3.5 0 0 0-3.5-3.5m0 3.5v5.25H7V14zM7 42V22.75h42V42z"
+      />
+      <path fill="#000" d="M10.5 35H28v3.5H10.5z" />
+    </svg>
+  );
+}
+
 function BuyEnergyForm({ variant }) {
   const [selectedKwh, setSelectedKwh] = useState(null);
   const [customKwh, setCustomKwh] = useState("");
@@ -93,6 +111,23 @@ function BuyEnergyForm({ variant }) {
             )}
           </div>
           <span className={styles.customUnit}>kWh</span>
+        </div>
+        {/* Payment method */}
+        <div>
+          <p className={styles.sectionTitle}>Payment Method</p>
+          <div className={styles.paymentMethods}>
+            {PAYMENT_METHODS.map(({ id, pname, sub }) => (
+              <button
+                key={id}
+                onClick={() => setPaymentMethod(id)}
+                className={`${styles.paymentMethod} ${paymentMethod === id ? styles.paymentMethodSelected : ""}`}
+              >
+                <CardIcon />
+                <span className={styles.paymentName}>{pname}</span>
+                <span className={styles.paymentSub}>{sub}</span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

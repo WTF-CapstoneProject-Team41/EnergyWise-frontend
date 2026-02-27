@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FcGoogle } from 'react-icons/fc';
-import styles from './SignUp.module.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FcGoogle } from "react-icons/fc";
+import styles from "./SignUp.module.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    password: '',
-    confirmPassword: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: "",
       }));
     }
   };
@@ -34,33 +34,33 @@ const SignUp = () => {
     const newErrors = {};
 
     if (!formData.firstName.trim()) {
-      newErrors.firstName = 'First name is required';
+      newErrors.firstName = "First name is required";
     }
 
     if (!formData.lastName.trim()) {
-      newErrors.lastName = 'Last name is required';
+      newErrors.lastName = "Last name is required";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+      newErrors.email = "Email is invalid";
     }
 
     if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
+      newErrors.phone = "Phone number is required";
     }
 
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
+      newErrors.password = "Password must be at least 8 characters";
     }
 
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'Please confirm your password';
+      newErrors.confirmPassword = "Please confirm your password";
     } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
+      newErrors.confirmPassword = "Passwords do not match";
     }
 
     setErrors(newErrors);
@@ -100,20 +100,21 @@ const SignUp = () => {
 
       // localStorage.setItem('token', data.token);
 
-      console.log('Form submitted:', formData);
-      navigate('/onboarding/energy-selection');
-      
+      console.log("Form submitted:", formData);
+      navigate("/login");
     } catch (error) {
-      console.error('Signup error:', error);
-      setErrors({ submit: error.message || 'Signup failed. Please try again.' });
+      console.error("Signup error:", error);
+      setErrors({
+        submit: error.message || "Signup failed. Please try again.",
+      });
     } finally {
       setLoading(false);
     }
   };
 
   const handleGoogleSignup = () => {
-    console.log('Google signup clicked');
-    alert('Google signup - Connect to your OAuth backend');
+    console.log("Google signup clicked");
+    alert("Google signup - Connect to your OAuth backend");
   };
 
   return (
@@ -144,7 +145,7 @@ const SignUp = () => {
           <div className={styles.header}>
             <h1 className={styles.title}>Sign Up</h1>
             <p className={styles.subtitle}>
-              Already have an account?{' '}
+              Already have an account?{" "}
               <Link to="/login" className={styles.link}>
                 Log in
               </Link>
@@ -172,7 +173,7 @@ const SignUp = () => {
                 value={formData.firstName}
                 onChange={handleChange}
                 placeholder="First Name"
-                className={`${styles.input} ${errors.firstName ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.firstName ? styles.inputError : ""}`}
               />
               {errors.firstName && (
                 <p className={styles.errorText}>{errors.firstName}</p>
@@ -186,7 +187,7 @@ const SignUp = () => {
                 value={formData.lastName}
                 onChange={handleChange}
                 placeholder="Last Name"
-                className={`${styles.input} ${errors.lastName ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.lastName ? styles.inputError : ""}`}
               />
               {errors.lastName && (
                 <p className={styles.errorText}>{errors.lastName}</p>
@@ -200,7 +201,7 @@ const SignUp = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Email"
-                className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
               />
               {errors.email && (
                 <p className={styles.errorText}>{errors.email}</p>
@@ -214,7 +215,7 @@ const SignUp = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Phone"
-                className={`${styles.input} ${errors.phone ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.phone ? styles.inputError : ""}`}
               />
               {errors.phone && (
                 <p className={styles.errorText}>{errors.phone}</p>
@@ -228,7 +229,7 @@ const SignUp = () => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Password"
-                className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.password ? styles.inputError : ""}`}
               />
               {errors.password && (
                 <p className={styles.errorText}>{errors.password}</p>
@@ -242,7 +243,7 @@ const SignUp = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm Password"
-                className={`${styles.input} ${errors.confirmPassword ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.confirmPassword ? styles.inputError : ""}`}
               />
               {errors.confirmPassword && (
                 <p className={styles.errorText}>{errors.confirmPassword}</p>
@@ -250,9 +251,7 @@ const SignUp = () => {
             </div>
 
             {errors.submit && (
-              <div className={styles.submitError}>
-                {errors.submit}
-              </div>
+              <div className={styles.submitError}>{errors.submit}</div>
             )}
 
             <button
@@ -260,16 +259,16 @@ const SignUp = () => {
               disabled={loading}
               className={styles.submitButton}
             >
-              {loading ? 'Creating account...' : 'Continue'}
+              {loading ? "Creating account..." : "Continue"}
             </button>
           </form>
 
           <p className={styles.terms}>
-            By signing up, you agree to our{' '}
+            By signing up, you agree to our{" "}
             <Link to="/terms" className={styles.link}>
               Terms of Service
-            </Link>{' '}
-            and acknowledge our{' '}
+            </Link>{" "}
+            and acknowledge our{" "}
             <Link to="/privacy" className={styles.link}>
               Privacy Policy
             </Link>

@@ -54,7 +54,9 @@
   font-weight: 600;
   font-size: 14px;
   font-family: var(--font-body);
-  transition: background 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    color 0.15s;
 }
 
 .navItem:hover {
@@ -107,7 +109,9 @@
   height: 2px;
   background: #0b0b0b;
   border-radius: 2px;
-  transition: transform 0.2s, opacity 0.2s;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
 }
 
 .hamburgerOpen span:nth-child(1) {
@@ -146,4 +150,24 @@
   .overlay {
     display: block;
   }
+}
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  margin: 12px;
+  border-radius: 10px;
+  color: #e05252;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: calc(100% - 24px);
+  transition: background 0.15s;
+}
+
+.logoutBtn:hover {
+  background: #fdf0f0;
 }

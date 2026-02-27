@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./BuyEnergyForm.module.css";
+import { paymentsAPI } from "../../api/payments";
+import { openPaystackPopup } from "../../utils/paystack";
+import { useAuth } from "../../context/AuthContext";
 
 const PRESETS = [
   { kwh: 25, price: 2750 },
@@ -42,7 +45,14 @@ function BuyEnergyForm({ variant }) {
   const [rate, setRate] = useState(FALLBACK_RATE);
   const [showSuccess, setShowSuccess] = useState(false);
   const [copied, setCopied] = useState(false);
-
+  const { user } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [newBalance, setNewBalance] = useState(null);
+  const [unitsCredited, setUnitsCredited] = useState(null);
+  const userEmail = user?.identifier?.includes("@")
+    ? user.identifier
+    : `${user?.identifier}@energywise.com`;
   // derived values
   const activeKwh = selectedKwh ?? (customKwh ? Number(customKwh) : 0);
   const totalAmount = activeKwh * rate;
@@ -94,9 +104,48 @@ function BuyEnergyForm({ variant }) {
       year: "numeric",
     });
   }
-  const handleContinue = () => {
-    // Paystack will be wired here
-    setShowSuccess(true);
+  const handleContinue = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Step 1 — open Paystack popup directly
+      openPaystackPopup({
+        email: user.email,
+        amount: totalAmount,
+
+        onSuccess: async (reference) => {
+          // Step 2 — Paystack confirmed, now verify with backend
+          try {
+            const { data } = await paymentsAPI.verify(reference);
+            // data.units_credited, data.new_balance
+            setUnitsCredited(data.units_credited);
+            setNewBalance(data.new_balance);
+            setShowSuccess(true);
+          } catch (err) {
+            if (err.response?.status === 400) {
+              setError("This payment has already been verified.");
+            } else if (err.response?.status === 401) {
+              setError("Session expired. Please log in again.");
+            } else {
+              setError(
+                "Payment went through but verification failed. Contact support.",
+              );
+            }
+          } finally {
+            setLoading(false);
+          }
+        },
+
+        onClose: () => {
+          // user closed popup without paying
+          setLoading(false);
+        },
+      });
+    } catch (err) {
+      setError("Could not open payment. Please try again.");
+      setLoading(false);
+    }
   };
   return (
     <div className={styles.form}>
@@ -195,10 +244,27 @@ function BuyEnergyForm({ variant }) {
         <button
           className={styles.continueBtn}
           onClick={handleContinue}
-          disabled={!canContinue}
+          disabled={!canContinue || loading}
         >
-          {variant === "onboarding" ? "Continue to Payment" : "Continue"}
+          {loading
+            ? "Processing..."
+            : variant === "onboarding"
+              ? "Continue to Payment"
+              : "Continue"}
         </button>
+
+        {error && (
+          <p
+            style={{
+              color: "#e05252",
+              fontSize: "0.85rem",
+              textAlign: "center",
+              marginTop: "8px",
+            }}
+          >
+            {error}
+          </p>
+        )}
       </div>
       {/* Payment success modal */}
       {showSuccess && (
@@ -224,34 +290,52 @@ function BuyEnergyForm({ variant }) {
               </div>
             </div>
 
-            {/* Token */}
-            <p className={styles.token}>1234 5678 9012 346 690</p>
-            <button
-              className={`${styles.copyBtn} ${copied ? styles.copyBtnCopied : ""}`}
-              onClick={handleCopyToken}
+            {/* Instead of token, show what was credited */}
+            <div
+              style={{
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+                gap: "4px",
+              }}
             >
-              {copied ? "Copied!" : "Copy Token"}
-            </button>
+              <p
+                style={{
+                  fontSize: "0.8rem",
+                  color: "#6b7c78",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                }}
+              >
+                Units Credited
+              </p>
+              <p
+                style={{ fontSize: "2rem", fontWeight: 800, color: "#1a7a5e" }}
+              >
+                {unitsCredited ?? activeKwh} kWh
+              </p>
+            </div>
 
             <hr className={styles.modalDivider} />
 
             {/* Order summary */}
-            <div className={styles.modalSummary}>
-              <p className={styles.modalSummaryTitle}>Order Summary</p>
-              <div className={styles.modalSummaryRow}>
-                <span>Energy Units</span>
-                <span>{activeKwh > 0 ? `${activeKwh} kWh` : "50 kWh"}</span>
-              </div>
-              <div className={styles.modalSummaryRow}>
-                <span>Amount Paid</span>
-                <span>
-                  {activeKwh > 0 ? formatNaira(totalAmount) : "₦5,500"}
-                </span>
-              </div>
-              <div className={styles.modalSummaryRow}>
-                <span>Transaction date</span>
-                <span>{formatDate()}</span>
-              </div>
+            <div className={styles.modalSummaryRow}>
+              <span>Energy Units</span>
+              <span>{unitsCredited ?? activeKwh} kWh</span>
+            </div>
+            <div className={styles.modalSummaryRow}>
+              <span>Amount Paid</span>
+              <span>{formatNaira(totalAmount)}</span>
+            </div>
+            <div className={styles.modalSummaryRow}>
+              <span>New Balance</span>
+              <span style={{ color: "#1a7a5e", fontWeight: 700 }}>
+                {newBalance ?? "—"} kWh
+              </span>
+            </div>
+            <div className={styles.modalSummaryRow}>
+              <span>Transaction date</span>
+              <span>{formatDate()}</span>
             </div>
 
             <hr className={styles.modalDivider} />
@@ -282,8 +366,8 @@ function BuyEnergyForm({ variant }) {
                 <line x1="10" y1="21" x2="14" y2="21" />
               </svg>
               <p className={styles.usageText}>
-                {activeKwh > 0 ? activeKwh : 50}kWh can power your fridge for
-                ~20 days
+                {unitsCredited ?? activeKwh}kWh can power your fridge for ~20
+                days
               </p>
             </div>
 

@@ -21,10 +21,10 @@ import ProtectedRoute from "./components/auth/ProtectedRoute/ProtectedRoute";
 // Stub pages to be replaced with real components
 
 function Services() {
-  return <h1>Services</h1>;
+  return <h1>Services: Coming Soon</h1>;
 }
 function Account() {
-  return <h1>Account</h1>;
+  return <h1>Account: Coming Soon</h1>;
 }
 
 function App() {
@@ -67,7 +67,14 @@ function App() {
           path="/onboarding/log-purchase"
           element={<LogPurchaseOnboarding />}
         />
-        <Route element={<Layout />}>
+
+        <Route
+          element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/my-energy" element={<MyEnergy />} />
           <Route path="/insights" element={<Insights />} />

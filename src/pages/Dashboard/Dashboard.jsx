@@ -1,13 +1,7 @@
-import {
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  Tooltip,
-} from "recharts";
+import { ResponsiveContainer, BarChart, Bar, XAxis, Tooltip } from "recharts";
 import PageHeader from "../../components/PageHeader/PageHeader";
-import { useGreeting } from "../../hooks/useGreeting";
-import { useUser } from "../../context/UserContext";
+import { useGreeting } from "../../Hooks/useGreeting";
+import { useUser } from "../../Hooks/useUser";
 import styles from "./Dashboard.module.css";
 
 const monthlyConsumption = [
@@ -26,23 +20,80 @@ const monthlyConsumption = [
 ];
 
 const topConsumers = [
-  { name: "Air Conditioner", meta: "1500W. 8hrs/day", kwh: "12 kWh", pct: "60%", type: "ac" },
-  { name: "Refrigerator",    meta: "150W. 24hrs/day",  kwh: "3.6 kWh", pct: "18%", type: "fridge" },
-  { name: "Refrigerator",    meta: "150W. 24hrs/day",  kwh: "3.6 kWh", pct: "18%", type: "fridge" },
-  { name: "Refrigerator",    meta: "150W. 24hrs/day",  kwh: "3.6 kWh", pct: "18%", type: "fridge" },
-  { name: "Refrigerator",    meta: "150W. 24hrs/day",  kwh: "3.6 kWh", pct: "18%", type: "fridge" },
-  { name: "Refrigerator",    meta: "150W. 24hrs/day",  kwh: "3.6 kWh", pct: "18%", type: "fridge" },
+  {
+    name: "Air Conditioner",
+    meta: "1500W. 8hrs/day",
+    kwh: "12 kWh",
+    pct: "60%",
+    type: "ac",
+  },
+  {
+    name: "Refrigerator",
+    meta: "150W. 24hrs/day",
+    kwh: "3.6 kWh",
+    pct: "18%",
+    type: "fridge",
+  },
+  {
+    name: "Refrigerator",
+    meta: "150W. 24hrs/day",
+    kwh: "3.6 kWh",
+    pct: "18%",
+    type: "fridge",
+  },
+  {
+    name: "Refrigerator",
+    meta: "150W. 24hrs/day",
+    kwh: "3.6 kWh",
+    pct: "18%",
+    type: "fridge",
+  },
+  {
+    name: "Refrigerator",
+    meta: "150W. 24hrs/day",
+    kwh: "3.6 kWh",
+    pct: "18%",
+    type: "fridge",
+  },
+  {
+    name: "Refrigerator",
+    meta: "150W. 24hrs/day",
+    kwh: "3.6 kWh",
+    pct: "18%",
+    type: "fridge",
+  },
 ];
 
-/* ── SVG device icons ─────────────────────────────── */
 function AcIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <rect x="2" y="6" width="20" height="10" rx="2" stroke="#F59E0B" strokeWidth="1.8"/>
-      <line x1="6" y1="11" x2="18" y2="11" stroke="#F59E0B" strokeWidth="1.5"/>
-      <line x1="7"  y1="16" x2="5"  y2="20" stroke="#F59E0B" strokeWidth="1.5"/>
-      <line x1="12" y1="16" x2="12" y2="20" stroke="#F59E0B" strokeWidth="1.5"/>
-      <line x1="17" y1="16" x2="19" y2="20" stroke="#F59E0B" strokeWidth="1.5"/>
+      <rect
+        x="2"
+        y="6"
+        width="20"
+        height="10"
+        rx="2"
+        stroke="#F59E0B"
+        strokeWidth="1.8"
+      />
+      <line x1="6" y1="11" x2="18" y2="11" stroke="#F59E0B" strokeWidth="1.5" />
+      <line x1="7" y1="16" x2="5" y2="20" stroke="#F59E0B" strokeWidth="1.5" />
+      <line
+        x1="12"
+        y1="16"
+        x2="12"
+        y2="20"
+        stroke="#F59E0B"
+        strokeWidth="1.5"
+      />
+      <line
+        x1="17"
+        y1="16"
+        x2="19"
+        y2="20"
+        stroke="#F59E0B"
+        strokeWidth="1.5"
+      />
     </svg>
   );
 }
@@ -50,10 +101,34 @@ function AcIcon() {
 function FridgeIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <rect x="5" y="2" width="14" height="20" rx="2" stroke="#F59E0B" strokeWidth="1.8"/>
-      <line x1="5" y1="9" x2="19" y2="9" stroke="#F59E0B" strokeWidth="1.5"/>
-      <line x1="9" y1="5.5" x2="9" y2="7.5" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="9" y1="12" x2="9" y2="16"   stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round"/>
+      <rect
+        x="5"
+        y="2"
+        width="14"
+        height="20"
+        rx="2"
+        stroke="#F59E0B"
+        strokeWidth="1.8"
+      />
+      <line x1="5" y1="9" x2="19" y2="9" stroke="#F59E0B" strokeWidth="1.5" />
+      <line
+        x1="9"
+        y1="5.5"
+        x2="9"
+        y2="7.5"
+        stroke="#F59E0B"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <line
+        x1="9"
+        y1="12"
+        x2="9"
+        y2="16"
+        stroke="#F59E0B"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }
@@ -66,8 +141,16 @@ function DeviceIcon({ type }) {
 function BuyIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-      <rect x="2" y="5" width="20" height="14" rx="2" stroke="#1b1b1b" strokeWidth="2"/>
-      <line x1="2" y1="10" x2="22" y2="10" stroke="#1b1b1b" strokeWidth="2"/>
+      <rect
+        x="2"
+        y="5"
+        width="20"
+        height="14"
+        rx="2"
+        stroke="#1b1b1b"
+        strokeWidth="2"
+      />
+      <line x1="2" y1="10" x2="22" y2="10" stroke="#1b1b1b" strokeWidth="2" />
     </svg>
   );
 }
@@ -75,8 +158,19 @@ function BuyIcon() {
 function SendIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-      <path d="M22 2L11 13" stroke="#1b1b1b" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="#1b1b1b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <path
+        d="M22 2L11 13"
+        stroke="#1b1b1b"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M22 2L15 22L11 13L2 9L22 2Z"
+        stroke="#1b1b1b"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }
@@ -84,10 +178,18 @@ function SendIcon() {
 function LogIcon() {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-      <rect x="5" y="2" width="14" height="20" rx="2" stroke="white" strokeWidth="2"/>
-      <line x1="9" y1="7"  x2="15" y2="7"  stroke="white" strokeWidth="1.5"/>
-      <line x1="9" y1="11" x2="15" y2="11" stroke="white" strokeWidth="1.5"/>
-      <line x1="9" y1="15" x2="13" y2="15" stroke="white" strokeWidth="1.5"/>
+      <rect
+        x="5"
+        y="2"
+        width="14"
+        height="20"
+        rx="2"
+        stroke="white"
+        strokeWidth="2"
+      />
+      <line x1="9" y1="7" x2="15" y2="7" stroke="white" strokeWidth="1.5" />
+      <line x1="9" y1="11" x2="15" y2="11" stroke="white" strokeWidth="1.5" />
+      <line x1="9" y1="15" x2="13" y2="15" stroke="white" strokeWidth="1.5" />
     </svg>
   );
 }
@@ -95,9 +197,17 @@ function LogIcon() {
 function TodayChartIcon() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <rect x="3"  y="13" width="4" height="8" rx="1" fill="#F59E0B"/>
-      <rect x="10" y="8"  width="4" height="13" rx="1" fill="#0d7a6d"/>
-      <rect x="17" y="4"  width="4" height="17" rx="1" fill="#F59E0B" opacity="0.5"/>
+      <rect x="3" y="13" width="4" height="8" rx="1" fill="#F59E0B" />
+      <rect x="10" y="8" width="4" height="13" rx="1" fill="#0d7a6d" />
+      <rect
+        x="17"
+        y="4"
+        width="4"
+        height="17"
+        rx="1"
+        fill="#F59E0B"
+        opacity="0.5"
+      />
     </svg>
   );
 }
@@ -106,11 +216,16 @@ function TodayChartIcon() {
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
-    <div style={{
-      background: "#0d7a6d", color: "white",
-      padding: "6px 10px", borderRadius: 8,
-      fontSize: 12, fontWeight: 700,
-    }}>
+    <div
+      style={{
+        background: "#0d7a6d",
+        color: "white",
+        padding: "6px 10px",
+        borderRadius: 8,
+        fontSize: 12,
+        fontWeight: 700,
+      }}
+    >
       {label}: {payload[0].value} kWh
     </div>
   );
@@ -122,8 +237,13 @@ function SearchAndAvatar({ initials }) {
     <>
       <div className={styles.search}>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-          <circle cx="11" cy="11" r="8" stroke="#9ca3af" strokeWidth="2"/>
-          <path d="M21 21L16.65 16.65" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round"/>
+          <circle cx="11" cy="11" r="8" stroke="#9ca3af" strokeWidth="2" />
+          <path
+            d="M21 21L16.65 16.65"
+            stroke="#9ca3af"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
         </svg>
         <input placeholder="Search...." />
       </div>
@@ -134,8 +254,8 @@ function SearchAndAvatar({ initials }) {
 
 /* ── Dashboard page ───────────────────────────────── */
 export default function Dashboard() {
-  const greeting = useGreeting();   // time-based: "Good morning" / "Good afternoon" / etc.
-  const { user } = useUser();       // { name, initials } from UserContext
+  const greeting = useGreeting(); // time-based: "Good morning" / "Good afternoon" / etc.
+  const { user } = useUser(); // { name, initials } from UserContext
 
   return (
     <div className={styles.page}>
@@ -147,7 +267,6 @@ export default function Dashboard() {
 
       {/* ── Top Row ─────────────────────────────── */}
       <div className={styles.topRow}>
-
         <section className={styles.balanceCard}>
           <div className={styles.balanceLabel}>AVAILABLE ENERGY</div>
           <div className={styles.balanceValue}>
@@ -170,14 +289,22 @@ export default function Dashboard() {
           </div>
 
           <div className={styles.actions}>
-            <button className={styles.btnPrimary}><BuyIcon /> Buy Energy</button>
-            <button className={styles.btnPrimary}><SendIcon /> Send Energy</button>
-            <button className={styles.btnGhost}><LogIcon /> Log Purchase</button>
+            <button className={styles.btnPrimary}>
+              <BuyIcon /> Buy Energy
+            </button>
+            <button className={styles.btnPrimary}>
+              <SendIcon /> Send Energy
+            </button>
+            <button className={styles.btnGhost}>
+              <LogIcon /> Log Purchase
+            </button>
           </div>
         </section>
 
         <section className={styles.todayCard}>
-          <div className={styles.todayIconBox}><TodayChartIcon /></div>
+          <div className={styles.todayIconBox}>
+            <TodayChartIcon />
+          </div>
           <div className={styles.todayRight}>
             <div className={styles.todayDelta}>-12%</div>
             <div className={styles.todayValue}>3.8 kWh</div>
@@ -188,7 +315,6 @@ export default function Dashboard() {
 
       {/* ── Bottom Grid ─────────────────────────── */}
       <div className={styles.bottomGrid}>
-
         <section className={styles.panel}>
           <div className={styles.panelHeader}>
             <h3>Consumption Trends</h3>
@@ -208,7 +334,10 @@ export default function Dashboard() {
                   tickLine={false}
                   tick={{ fontSize: 11, fill: "#6b7280", fontWeight: 600 }}
                 />
-                <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(0,0,0,0.04)" }} />
+                <Tooltip
+                  content={<CustomTooltip />}
+                  cursor={{ fill: "rgba(0,0,0,0.04)" }}
+                />
                 <Bar dataKey="v" radius={[6, 6, 0, 0]} fill="#0d7a6d" />
               </BarChart>
             </ResponsiveContainer>
@@ -216,15 +345,14 @@ export default function Dashboard() {
         </section>
 
         <div className={styles.rightCol}>
-
           <section className={styles.recoCard}>
             <div className={styles.recoTitle}>
               <div className={styles.recoIconWrap}>💡</div>
               <span>Recommendation</span>
             </div>
             <p className={styles.recoText}>
-              Your AC accounts for 60% of energy consumption. Reducing usage by 2
-              hours/day could save ₦2,400/month.
+              Your AC accounts for 60% of energy consumption. Reducing usage by
+              2 hours/day could save ₦2,400/month.
             </p>
             <button className={styles.recoBtn}>View Full Insight →</button>
           </section>

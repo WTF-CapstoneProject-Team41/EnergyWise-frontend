@@ -2,13 +2,13 @@ import { useState } from "react";
 import ForecastTab from "./tabs/ForecastTab";
 import TrendsTab from "./tabs/TrendsTab";
 import RecommendationsTab from "./tabs/RecommendationsTab";
-import { useUser } from "../../context/UserContext";
+import { useUser } from "../../Hooks/useUser";
 import styles from "./Insights.module.css";
 
 const TABS = [
-  { id: "forecast",        label: "Forecast" },
+  { id: "forecast", label: "Forecast" },
   { id: "recommendations", label: "Recommendations" },
-  { id: "trends",          label: "Trends" },
+  { id: "trends", label: "Trends" },
 ];
 
 export default function Insights() {
@@ -35,9 +35,9 @@ export default function Insights() {
       </div>
 
       <div>
-        {active === "forecast"        && <ForecastTab />}
+        {active === "forecast" && <ForecastTab />}
         {active === "recommendations" && <RecommendationsTab />}
-        {active === "trends"          && <TrendsTab />}
+        {active === "trends" && <TrendsTab />}
       </div>
     </div>
   );

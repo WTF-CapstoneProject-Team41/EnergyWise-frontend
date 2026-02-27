@@ -30,6 +30,10 @@ function App() {
           path="/onboarding/buy-energy"
           element={<BuyEnergyOnboarding />}
         />
+        <Route
+          path="/onboarding/log-purchase"
+          element={<LogPurchaseOnboarding />}
+        />
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/my-energy" element={<MyEnergy />} />
@@ -37,16 +41,10 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/account" element={<Account />} />
           <Route path="/buy-energy" element={<BuyEnergy />} />
-          <Route
-            path="/onboarding/buy-energy"
-            element={<BuyEnergyOnboarding />}
-          />
+
           <Route path="/log-purchase" element={<LogPurchase />} />
         </Route>
-        <Route
-          path="/onboarding/log-purchase"
-          element={<LogPurchaseOnboarding />}
-        />
+
         <Route path="*" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>

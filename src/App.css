@@ -6,7 +6,9 @@
 
 .content {
   flex: 1;
-  margin-left: 272px;
+
+  margin-left: 272px; /* same width as sidebar */
+
   padding: 32px;
 }
 

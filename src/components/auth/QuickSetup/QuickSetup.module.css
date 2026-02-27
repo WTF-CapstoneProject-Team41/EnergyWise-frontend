@@ -1,0 +1,288 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  padding: 2rem 1rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.backgroundDecoration {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  opacity: 0.1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2310b981' d='M45.5,-57.8C58.1,-45.5,67.2,-30.3,71.8,-13.5C76.4,3.3,76.5,21.7,68.9,36.5C61.3,51.3,46,62.5,29.5,68.1C13,73.7,-4.7,73.7,-21.2,68.5C-37.7,63.3,-52.9,52.9,-63.5,38.7C-74.1,24.5,-80.1,6.5,-78.3,-11.1C-76.5,-28.7,-67,-45.9,-53.2,-58.1C-39.4,-70.3,-21.4,-77.5,-3.2,-73.6C15,-69.7,32.9,-70.1,45.5,-57.8Z' transform='translate(100 100)' /%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.logo {
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoIcon {
+  width: 2rem;
+  height: 2rem;
+  background-color: #10b981;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoSvg {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: white;
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.content {
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+  font-size: 0.9375rem;
+  color: #6b7280;
+  margin: 0 0 3rem 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 1.5rem 0;
+  text-align: left;
+}
+
+.applianceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+.applianceButton {
+  position: relative;
+  background-color: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1.25rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.applianceButton:hover {
+  border-color: #10b981;
+  background-color: #f0fdf4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.applianceButtonActive {
+  border-color: #10b981;
+  background-color: #d1fae5;
+}
+
+.applianceIcon {
+  font-size: 2rem;
+}
+
+.applianceName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  text-align: center;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: #10b981;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.detailsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.applianceCard {
+  background-color: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: left;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.cardIcon {
+  font-size: 1.75rem;
+}
+
+.cardName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.cardInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.input {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  color: #1f2937;
+  transition: all 0.2s;
+  outline: none;
+  font-family: inherit;
+}
+
+.input:focus {
+  background-color: white;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.inputHint {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.cardUsage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.usageLabel {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.usageValue {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #10b981;
+}
+
+.continueButton {
+  width: 100%;
+  max-width: 400px;
+  background-color: #10b981;
+  color: white;
+  font-weight: 500;
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+  font-family: inherit;
+  margin-top: 2rem;
+}
+
+.continueButton:hover:not(:disabled) {
+  background-color: #059669;
+}
+
+.continueButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .applianceGrid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .applianceButton {
+    padding: 1rem 0.5rem;
+  }
+
+  .applianceIcon {
+    font-size: 1.5rem;
+  }
+
+  .detailsGrid {
+    grid-template-columns: 1fr;
+  }
+}

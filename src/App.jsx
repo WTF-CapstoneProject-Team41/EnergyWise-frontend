@@ -1,5 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Sidebar from "./components/Sidebar/Sidebar";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Insights from "./pages/Insights/Insights";
+
+
 import Layout from "./components/Layout/Layout";
 import MyEnergy from "./pages/MyEnergy/MyEnergy";
 import BuyEnergy from "./pages/BuyEnergy/BuyEnergy";
@@ -8,23 +13,20 @@ import LogPurchase from "./pages/LogPurchase/LogPurchase";
 import LogPurchaseOnboarding from "./pages/Onboarding/LogPurchaseOnboarding";
 
 // Stub pages to be replaced with real components
-function Dashboard() {
-  return <h1>Dashboard</h1>;
-}
 
-function Insights() {
-  return <h1>Insights</h1>;
-}
+
 function Services() {
   return <h1>Services</h1>;
 }
 function Account() {
   return <h1>Account</h1>;
+
 }
 
 function App() {
   return (
     <BrowserRouter>
+
       <Routes>
         <Route
           path="/onboarding/buy-energy"

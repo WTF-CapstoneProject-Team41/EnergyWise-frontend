@@ -1,0 +1,68 @@
+.page {
+  width: 100%;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 28px;
+  color: #0b0b0b;
+  letter-spacing: -0.3px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: var(--secondary-color);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+/* ── Tab Pills ───────────────────────────────────── */
+.tabPills {
+  display: inline-flex;
+  gap: 4px;
+  background: #ffffff;
+  border: 1px solid #e8eeec;
+  border-radius: 999px;
+  padding: 5px;
+  margin-bottom: 24px;
+}
+
+.tab {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  color: #4b5563;
+  padding: 9px 20px;
+  border-radius: 999px;
+  background: transparent;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+
+/* Inactive hover — subtle, no background */
+.tab:not(.active):hover {
+  color: #0d7a6d;
+}
+
+/* Active — light teal background, green text */
+.tab.active {
+  background: #e6f7f4;
+  color: #0d7a6d;
+  font-weight: 700;
+}

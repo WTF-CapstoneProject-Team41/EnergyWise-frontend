@@ -1,0 +1,468 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+  gap: 24px;
+  position: absolute;
+  top: 0px;
+  right: 64px;
+}
+.searchBox {
+  display: flex;
+  align-items: center;
+  width: 244px;
+  height: 40px;
+  gap: 8px;
+  padding: 0px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--Teal-green-200, #9ff9ee);
+  width: 220px;
+}
+.searchBox input {
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  color: #6b6d6d;
+  background: transparent;
+  width: 100%;
+}
+
+.searchBox input::placeholder {
+  color: #6b6d6d;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: var(--primary-color);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.addBtn:hover {
+  background: rgba(9, 144, 126, 0.87);
+}
+
+/* two-column layout */
+.topGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .topGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.balanceCard {
+  display: flex;
+  width: 530px;
+  padding: 32px;
+  flex-direction: column;
+  align-items: flex-start;
+  /* gap: 8px; */
+  border-radius: 16px;
+  background: #007365;
+  box-shadow: 0 4px 4px 8px #137b6f;
+  color: #fff;
+}
+
+.balanceLabel {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 140%; /* 19.6px */
+  letter-spacing: 0.42px;
+}
+
+.balanceValue {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 78.4px;
+  margin-bottom: 24px;
+}
+
+.balanceValue span {
+  font-size: 56px;
+  font-weight: 700;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 457px;
+  height: 143px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0.3px 0.5px 1px 0.5px #1cb8a5;
+  border-radius: 20px;
+  padding: 16px 24px;
+  margin-bottom: 12px;
+}
+
+.statLabel {
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 140%; /* 16.8px */
+  letter-spacing: 0.24px;
+}
+
+.statValue {
+  font-family: "DM Sans";
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 140%; /* 28px */
+  letter-spacing: 0.4px;
+}
+
+/* Action buttons */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.btnAmber {
+  display: flex;
+  height: 52px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: var(--secondary-color);
+  color: var(--text-color);
+  font-family: var(--font-heading);
+  font-size: 16px;
+  line-height: normal;
+  font-weight: 900;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.btnAmber:hover {
+  background: rgba(245, 159, 11, 0.664);
+}
+
+.btnOutline {
+  display: flex;
+  flex-shrink: 0;
+  height: 52px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: var(--primary-color);
+  color: var(--text-color);
+  font-size: 16px;
+  font-weight: 900;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btnOutline:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* right */
+.breakdown {
+  display: inline-flex;
+  padding: 0 299px 27px 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  border-radius: 16px;
+  background: #fff;
+  position: relative;
+}
+.containerTop {
+  display: flex;
+  width: 250px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+.breakdownTitle {
+  color: #000;
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 140%;
+}
+.breakdownSubtitle {
+  color: #424040;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 140%;
+  margin-top: 5px;
+}
+.totalLabel {
+  color: #424040;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 140%;
+  text-transform: uppercase;
+}
+.totalValue {
+  color: #000;
+  font-family: var(--font-heading);
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 140%;
+}
+.totalSub {
+  color: #424040;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+/* chart */
+.chartRow {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.legend {
+  display: flex;
+
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
+  position: absolute;
+  right: 40px;
+  bottom: 35px;
+  flex: 1;
+}
+
+.legendItem {
+  width: 276px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.legendLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.legendName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #374864;
+  font-family: var(--font-body);
+}
+
+.legendPct {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  font-family: var(--font-body);
+}
+.tableSection {
+  border-radius: 24px;
+  border: 0.5px solid #505050;
+  background: #fff;
+}
+
+/* appliance table */
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 21px 49px 40px;
+}
+.tableTitle {
+  color: #272727;
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 700;
+}
+.addNewBtn {
+  display: flex;
+  width: 116px;
+  height: 38px;
+  border: none;
+  padding: 24px 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.addNewBtn:hover {
+  background: #155f4a;
+}
+
+.tableWrapper {
+  width: 100%;
+}
+
+/* Shared grid structure for header + rows */
+.row {
+  display: grid;
+  grid-template-columns:
+    1.3fr
+    1.3fr
+    1fr
+    1fr
+    1fr
+    1fr;
+
+  align-items: center;
+  gap: 56px;
+  padding: 16px 0;
+  margin-left: 30px;
+  min-width: 927px;
+}
+
+/* Header styling */
+.headerRow {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #62738e;
+  margin-left: 38px;
+}
+
+.applianceCell {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-width: 0;
+}
+
+.textBlock {
+  min-width: 0;
+}
+.applianceName {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.applianceLocation {
+  color: #62738e;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.applianceName,
+.applianceLocation {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.specs {
+  color: #62738e;
+  font-size: 14px;
+  font-weight: 500;
+}
+.usage {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.48px;
+}
+.contributionBadge {
+  display: flex;
+  width: 50px;
+  height: 27px;
+  padding: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--Teal-green-100, #cffcf6);
+  color: var(--primary-color);
+  font-size: 12px;
+}
+.dailyCost {
+  color: #62738e;
+  font-family: Inter;
+  font-size: 14px;
+
+  font-weight: 600;
+}
+.actionBtns {
+  display: flex;
+  gap: 8px;
+}
+.editBtn,
+.deleteBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.editBtn {
+  background: #e8f5f1;
+  color: #1a7a5e;
+}
+.editBtn:hover {
+  background: #d0ede6;
+}
+.deleteBtn {
+  background: #fdf0f0;
+  color: #e05252;
+}
+.deleteBtn:hover {
+  background: #fad9d9;
+}

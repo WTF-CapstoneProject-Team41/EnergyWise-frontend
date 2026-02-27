@@ -1,4 +1,4 @@
-.app {
+.shell {
   display: flex;
   min-height: 100vh;
   background: #f0f4f3;
@@ -6,10 +6,9 @@
 
 .content {
   flex: 1;
-
-  margin-left: 272px; /* same width as sidebar */
-
+  margin-left: 296px;
   padding: 32px;
+  overflow-y: auto;
 }
 
 @media (max-width: 768px) {

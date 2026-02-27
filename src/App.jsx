@@ -6,6 +6,7 @@ import MyEnergy from "./pages/MyEnergy/MyEnergy";
 import BuyEnergy from "./pages/BuyEnergy/BuyEnergy";
 import BuyEnergyOnboarding from "./pages/Onboarding/BuyEnergyOnboarding";
 import LogPurchase from "./pages/LogPurchase/LogPurchase";
+import LogPurchaseOnboarding from "./pages/Onboarding/LogPurchaseOnboarding";
 
 // Stub pages to be replaced with real components
 function Dashboard() {
@@ -43,6 +44,10 @@ function App() {
           />
           <Route path="/log-purchase" element={<LogPurchase />} />
         </Route>
+        <Route
+          path="/onboarding/log-purchase"
+          element={<LogPurchaseOnboarding />}
+        />
         <Route path="*" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>

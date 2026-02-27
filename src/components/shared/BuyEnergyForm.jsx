@@ -40,6 +40,8 @@ function BuyEnergyForm({ variant }) {
   const [customKwh, setCustomKwh] = useState("");
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [rate, setRate] = useState(FALLBACK_RATE);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   // derived values
   const activeKwh = selectedKwh ?? (customKwh ? Number(customKwh) : 0);
@@ -72,10 +74,29 @@ function BuyEnergyForm({ variant }) {
       navigate("/my-energy");
     }
   };
+  const handleCopyToken = () => {
+    navigator.clipboard.writeText("1234 5678 9012 346 690");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  const handleDone = () => {
+    if (variant === "onboarding") {
+      navigate("/dashboard");
+    } else {
+      navigate("/my-energy");
+    }
+  };
 
+  function formatDate() {
+    return new Date().toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  }
   const handleContinue = () => {
     // Paystack will be wired here
-    navigate("/payment-success");
+    setShowSuccess(true);
   };
   return (
     <div className={styles.form}>
@@ -179,6 +200,100 @@ function BuyEnergyForm({ variant }) {
           {variant === "onboarding" ? "Continue to Payment" : "Continue"}
         </button>
       </div>
+      {/* Payment success modal */}
+      {showSuccess && (
+        <div className={styles.modalOverlay} onClick={handleDone}>
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            {/* Title */}
+            <h2 className={styles.modalTitle}>Payment Successful!</h2>
+
+            {/* Checkmark with glow */}
+            <div className={styles.checkWrapper}>
+              <div className={styles.checkGlow} />
+              <div className={styles.checkCircle}>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Token */}
+            <p className={styles.token}>1234 5678 9012 346 690</p>
+            <button
+              className={`${styles.copyBtn} ${copied ? styles.copyBtnCopied : ""}`}
+              onClick={handleCopyToken}
+            >
+              {copied ? "Copied!" : "Copy Token"}
+            </button>
+
+            <hr className={styles.modalDivider} />
+
+            {/* Order summary */}
+            <div className={styles.modalSummary}>
+              <p className={styles.modalSummaryTitle}>Order Summary</p>
+              <div className={styles.modalSummaryRow}>
+                <span>Energy Units</span>
+                <span>{activeKwh > 0 ? `${activeKwh} kWh` : "50 kWh"}</span>
+              </div>
+              <div className={styles.modalSummaryRow}>
+                <span>Amount Paid</span>
+                <span>
+                  {activeKwh > 0 ? formatNaira(totalAmount) : "₦5,500"}
+                </span>
+              </div>
+              <div className={styles.modalSummaryRow}>
+                <span>Transaction date</span>
+                <span>{formatDate()}</span>
+              </div>
+            </div>
+
+            <hr className={styles.modalDivider} />
+
+            {/* Usage impact */}
+            <div className={styles.usageImpact}>
+              <svg
+                className={styles.usageIcon}
+                width="36"
+                height="36"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="12" y1="2" x2="12" y2="4" />
+                <line x1="4.93" y1="4.93" x2="6.34" y2="6.34" />
+                <line x1="2" y1="12" x2="4" y2="12" />
+                <line x1="4.93" y1="19.07" x2="6.34" y2="17.66" />
+                <line x1="12" y1="22" x2="12" y2="20" />
+                <line x1="19.07" y1="19.07" x2="17.66" y2="17.66" />
+                <line x1="22" y1="12" x2="20" y2="12" />
+                <line x1="19.07" y1="4.93" x2="17.66" y2="6.34" />
+                <path d="M12 6a6 6 0 0 1 0 12h0a6 6 0 0 1 0-12" />
+                <line x1="12" y1="18" x2="12" y2="21" />
+                <line x1="10" y1="21" x2="14" y2="21" />
+              </svg>
+              <p className={styles.usageText}>
+                {activeKwh > 0 ? activeKwh : 50}kWh can power your fridge for
+                ~20 days
+              </p>
+            </div>
+
+            {/* Done */}
+            <button className={styles.doneBtn} onClick={handleDone}>
+              Done
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

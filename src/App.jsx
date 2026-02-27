@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/Layout/Layout";
-import Sidebar from "./components/Sidebar/Sidebar";
 import MyEnergy from "./pages/MyEnergy/MyEnergy";
 import BuyEnergy from "./pages/BuyEnergy/BuyEnergy";
 import BuyEnergyOnboarding from "./pages/Onboarding/BuyEnergyOnboarding";

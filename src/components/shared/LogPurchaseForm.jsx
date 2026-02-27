@@ -46,6 +46,13 @@ function CalendarIcon() {
     </svg>
   );
 }
+function formatDate(date) {
+  return new Date().toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
 
 function LogPurchaseForm({ variant }) {
   const navigate = useNavigate();
@@ -55,6 +62,7 @@ function LogPurchaseForm({ variant }) {
   const [unitsReceived, setUnitsReceived] = useState("");
   const [unitsBalance, setUnitsBalance] = useState("");
   const [source, setSource] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   // derived values
   const units = Number(unitsReceived) || 0;
@@ -74,7 +82,7 @@ function LogPurchaseForm({ variant }) {
     //post to backend
     //POST api/purchase/log
     //{purchaseDate, amountPaid, unitsReceived, source }
-    navigate("/my-energy");
+    setShowSuccess(true);
   };
 
   return (
@@ -221,6 +229,55 @@ function LogPurchaseForm({ variant }) {
           Continue
         </button>
       </div>
+      {/* Success modal */}
+      {showSuccess && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => navigate("/my-energy")}
+        >
+          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+            <h2 className={styles.modalTitle}>Successfully Log Purchase!</h2>
+
+            {/* Checkmark with glow */}
+            <div className={styles.checkWrapper}>
+              <div className={styles.checkGlow} />
+              <div className={styles.checkCircle}>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Order summary */}
+            <div className={styles.modalSummary}>
+              <p className={styles.modalSummaryTitle}>Order Summary</p>
+              <div className={styles.modalSummaryRow}>
+                <span>Added Units</span>
+                <span>{units > 0 ? `${units} kWh` : "50 kWh"}</span>
+              </div>
+              <div className={styles.modalSummaryRow}>
+                <span>Transaction date</span>
+                <span>{formatDate()}</span>
+              </div>
+            </div>
+
+            {/* Done button */}
+            <button
+              className={styles.doneBtn}
+              onClick={() => navigate("/my-energy")}
+            >
+              Done
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

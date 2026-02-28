@@ -52,7 +52,7 @@ function BuyEnergyForm({ variant }) {
   const [unitsCredited, setUnitsCredited] = useState(null);
   const userEmail = user?.identifier?.includes("@")
     ? user.identifier
-    : `${user?.identifier}@energywise.com`;
+    : `${user?.identifier}@gmail.com`;
   // derived values
   const activeKwh = selectedKwh ?? (customKwh ? Number(customKwh) : 0);
   const totalAmount = activeKwh * rate;
@@ -61,9 +61,17 @@ function BuyEnergyForm({ variant }) {
   // ‼️‼️‼️get rate from backend‼️‼️‼️
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/energy-account`)
+    const token = localStorage.getItem("ew_token");
+    fetch(`${import.meta.env.VITE_API_URL}/energy-account`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => res.json())
-      .then((data) => setRate(data.rate))
+      .then((data) => {
+        if (data.rate) setRate(data.rate);
+      })
       .catch(() => {});
   }, []);
 
@@ -109,6 +117,14 @@ function BuyEnergyForm({ variant }) {
     setError(null);
 
     try {
+      console.log(
+        "activeKwh:",
+        activeKwh,
+        "rate:",
+        rate,
+        "totalAmount:",
+        totalAmount,
+      );
       // Step 1 — open Paystack popup directly
       openPaystackPopup({
         email: userEmail,

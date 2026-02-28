@@ -10,7 +10,6 @@ export function openPaystackPopup({ email, amount, onSuccess, onClose }) {
     email,
     amount: amount * 100, // converts naira to kobo
     onSuccess: (response) => {
-      // response.reference is what Paystack gives back
       onSuccess(response.reference);
     },
     onClose,

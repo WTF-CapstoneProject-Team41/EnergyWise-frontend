@@ -131,7 +131,6 @@ function BuyEnergyForm({ variant }) {
         amount: totalAmount,
 
         onSuccess: async (reference) => {
-          // Step 2 — Paystack confirmed, now verify with backend
           try {
             const { data } = await paymentsAPI.verify(reference);
             // data.units_credited, data.new_balance

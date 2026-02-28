@@ -31,7 +31,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* New routes in desired order */}
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />

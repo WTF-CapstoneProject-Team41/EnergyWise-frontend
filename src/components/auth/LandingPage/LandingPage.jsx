@@ -240,16 +240,16 @@ const LandingPage = () => {
                     <path
                       d="M22 17L13.5 8.5L8.5 13.5L2 7"
                       stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                     <path
                       d="M16 17H22V11"
                       stroke="white"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                 </div>
@@ -271,14 +271,14 @@ const LandingPage = () => {
                       <path
                         fill="url(#b)"
                         d="M125.004 94.963c-15.454 21.54-45.443 26.473-66.982 11.019S31.549 60.54 47.002 39.001c15.454-21.54 45.443-26.473 66.983-11.02 21.539 15.454 26.473 45.443 11.019 66.982"
-                        shape-rendering="crispEdges"
+                        shapeRendering="crispEdges"
                       />
                       <g
                         stroke="#fff"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="3.333"
-                        clip-path="url(#c)"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="3.333"
+                        clipPath="url(#c)"
                       >
                         <path d="M92.198 64.247a3.33 3.33 0 0 0 .55 3.342l6.77 8.103a.833.833 0 0 1-.934 1.302l-9.846-3.817a3.33 3.33 0 0 0-3.341.549l-8.103 6.77a.834.834 0 0 1-1.304-.935l3.82-9.844a3.33 3.33 0 0 0-.55-3.342l-6.773-8.102a.833.833 0 0 1 .937-1.305l9.844 3.82a3.33 3.33 0 0 0 3.342-.55l8.103-6.771a.833.833 0 0 1 1.304.936zM66.426 71.397l3.886-5.417M65.66 66.746l5.417 3.886M101.694 67.984l1.943-2.709M101.312 65.658l2.709 1.943" />
                       </g>
@@ -292,8 +292,8 @@ const LandingPage = () => {
                         y2="0"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop offset=".216" stop-color="#f59e0b" />
-                        <stop offset=".356" stop-color="#09907f" />
+                        <stop offset=".216" stopColor="#f59e0b" />
+                        <stop offset=".356" stopColor="#09907f" />
                       </linearGradient>
                       <clipPath id="c">
                         <path
@@ -307,13 +307,10 @@ const LandingPage = () => {
                         height="209.964"
                         x="-18.979"
                         y="-13"
-                        color-interpolation-filters="sRGB"
+                        colorInterpolationFilters="sRGB"
                         filterUnits="userSpaceOnUse"
                       >
-                        <feFlood
-                          flood-opacity="0"
-                          result="BackgroundImageFix"
-                        />
+                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
                         <feColorMatrix
                           in="SourceAlpha"
                           result="hardAlpha"

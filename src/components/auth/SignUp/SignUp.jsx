@@ -70,40 +70,35 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      return;
-    }
+    if (!validateForm()) return;
 
     setLoading(true);
 
     try {
-      // TODO: Replace with your actual backend endpoint
-      // const response = await fetch('YOUR_BACKEND_ENDPOINT/auth/signup', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     firstName: formData.firstName,
-      //     lastName: formData.lastName,
-      //     email: formData.email,
-      //     phone: formData.phone,
-      //     password: formData.password,
-      //   }),
-      // });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/signup`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            password: formData.password,
+          }),
+        },
+      );
 
-      // const data = await response.json();
+      const data = await response.json();
 
-      // if (!response.ok) {
-      //   throw new Error(data.message || 'Signup failed');
-      // }
+      if (!response.ok) {
+        throw new Error(data.message || "Signup failed");
+      }
 
-      // localStorage.setItem('token', data.token);
-
-      console.log("Form submitted:", formData);
+      // Signup successful — go to login
       navigate("/login");
     } catch (error) {
-      console.error("Signup error:", error);
       setErrors({
         submit: error.message || "Signup failed. Please try again.",
       });

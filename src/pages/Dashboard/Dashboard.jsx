@@ -3,6 +3,7 @@ import PageHeader from "../../components/PageHeader/PageHeader";
 import { useGreeting } from "../../Hooks/useGreeting";
 import { useUser } from "../../Hooks/useUser";
 import styles from "./Dashboard.module.css";
+import { useNavigate } from "react-router-dom";
 
 const monthlyConsumption = [
   { m: "Jan", v: 38 },
@@ -254,8 +255,9 @@ function SearchAndAvatar({ initials }) {
 
 /* ── Dashboard page ───────────────────────────────── */
 export default function Dashboard() {
-  const greeting = useGreeting(); // time-based: "Good morning" / "Good afternoon" / etc.
-  const { user } = useUser(); // { name, initials } from UserContext
+  const greeting = useGreeting();
+  const { user } = useUser();
+  const navigate = useNavigate();
 
   return (
     <div className={styles.page}>
@@ -289,13 +291,19 @@ export default function Dashboard() {
           </div>
 
           <div className={styles.actions}>
-            <button className={styles.btnPrimary}>
+            <button
+              className={styles.btnPrimary}
+              onClick={() => navigate("/buy-energy")}
+            >
               <BuyIcon /> Buy Energy
             </button>
             <button className={styles.btnPrimary}>
               <SendIcon /> Send Energy
             </button>
-            <button className={styles.btnGhost}>
+            <button
+              className={styles.btnGhost}
+              onClick={() => navigate("/log-purchase")}
+            >
               <LogIcon /> Log Purchase
             </button>
           </div>

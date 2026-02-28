@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./BuyEnergyForm.module.css";
 import { paymentsAPI } from "../../api/payments";
 import { openPaystackPopup } from "../../utils/paystack";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/useAuth";
 
 const PRESETS = [
   { kwh: 25, price: 2750 },
@@ -61,7 +61,7 @@ function BuyEnergyForm({ variant }) {
   // ‼️‼️‼️get rate from backend‼️‼️‼️
 
   useEffect(() => {
-    fetch("/api/energy/rate")
+    fetch(`${import.meta.env.VITE_API_URL}/energy-account`)
       .then((res) => res.json())
       .then((data) => setRate(data.rate))
       .catch(() => {});
@@ -111,7 +111,7 @@ function BuyEnergyForm({ variant }) {
     try {
       // Step 1 — open Paystack popup directly
       openPaystackPopup({
-        email: user.email,
+        email: userEmail,
         amount: totalAmount,
 
         onSuccess: async (reference) => {
@@ -142,7 +142,7 @@ function BuyEnergyForm({ variant }) {
           setLoading(false);
         },
       });
-    } catch (err) {
+    } catch {
       setError("Could not open payment. Please try again.");
       setLoading(false);
     }
@@ -370,6 +370,12 @@ function BuyEnergyForm({ variant }) {
                 days
               </p>
             </div>
+            <button
+              className={`${styles.copyBtn} ${copied ? styles.copyBtnCopied : ""}`}
+              onClick={handleCopyToken}
+            >
+              {copied ? "Copied!" : "Copy Token"}
+            </button>
 
             {/* Done */}
             <button className={styles.doneBtn} onClick={handleDone}>

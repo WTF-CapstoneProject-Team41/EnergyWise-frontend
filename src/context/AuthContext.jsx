@@ -1,7 +1,7 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
 // Create the context
-const AuthContext = createContext(null);
+export const AuthContext = createContext(null);
 
 // Keys for localStorage
 const TOKEN_KEY = "ew_token";
@@ -40,13 +40,4 @@ export function AuthProvider({ children }) {
       {children}
     </AuthContext.Provider>
   );
-}
-
-// Custom hook — this is what every component imports
-export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used inside AuthProvider");
-  }
-  return context;
 }

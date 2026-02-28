@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./LandingPage.module.css";
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 300);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleGetStarted = () => {
     navigate("/signup");
@@ -331,6 +340,15 @@ const LandingPage = () => {
                       </filter>
                     </defs>
                   </svg>
+                </div>
+              </div>
+              {/* Scroll indicator */}
+              <div
+                className={`${styles.scrollIndicator} ${scrolled ? styles.scrollIndicatorHidden : ""}`}
+              >
+                <span className={styles.scrollText}>Scroll to explore</span>
+                <div className={styles.scrollPill}>
+                  <div className={styles.scrollDot} />
                 </div>
               </div>
             </div>

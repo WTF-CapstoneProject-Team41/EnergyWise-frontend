@@ -1,8 +1,35 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styles from "./UserType.module.css";
 
 const UserType = () => {
   const navigate = useNavigate();
+  const [loadingType, setLoadingType] = useState(null);
+
+  const handleUserType = async (type) => {
+    setLoadingType(true);
+    try {
+      const token = localStorage.getItem("ew_token");
+      await fetch(`${import.meta.env.VITE_API_URL}/users/type`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ user_type: type }),
+      });
+
+      if (type === "HOUSEHOLD") {
+        navigate("/homeinfo");
+      } else {
+        navigate("/businessinfo");
+      }
+    } catch {
+      console.error("Failed to set user type");
+    } finally {
+      setLoadingType(null);
+    }
+  };
 
   return (
     <div className={styles.page}>
@@ -57,9 +84,12 @@ const UserType = () => {
               </div>
               <button
                 className={`${styles.optionBtn} ${styles.optionBtnGreen}`}
-                onClick={() => navigate("/homeinfo")}
+                onClick={() => handleUserType("HOUSEHOLD")}
+                disabled={loadingType !== null}
               >
-                Continue as Home
+                {loadingType === "HOUSEHOLD"
+                  ? "Please wait..."
+                  : "Continue as Home"}
               </button>
             </div>
 
@@ -79,9 +109,12 @@ const UserType = () => {
               </div>
               <button
                 className={`${styles.optionBtn} ${styles.optionBtnAmber}`}
-                onClick={() => navigate("/businessinfo")}
+                onClick={() => handleUserType("BUSINESS")}
+                disabled={loadingType !== null}
               >
-                Continue as Business
+                {loadingType === "BUSINESS"
+                  ? "Please wait..."
+                  : "Continue as business"}
               </button>
             </div>
           </div>

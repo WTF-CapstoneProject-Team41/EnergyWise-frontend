@@ -1,27 +1,28 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './HomeInfo.module.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./HomeInfo.module.css";
 
 const HomeInfo = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    primaryPowerSource: '',
-    householdSize: '',
-    stateCity: ''
+    primaryPowerSource: "",
+    householdSize: "",
+    country: "",
+    stateCity: "",
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: "",
       }));
     }
   };
@@ -30,15 +31,15 @@ const HomeInfo = () => {
     const newErrors = {};
 
     if (!formData.primaryPowerSource.trim()) {
-      newErrors.primaryPowerSource = 'Primary power source is required';
+      newErrors.primaryPowerSource = "Primary power source is required";
     }
 
     if (!formData.householdSize.trim()) {
-      newErrors.householdSize = 'Household size is required';
+      newErrors.householdSize = "Household size is required";
     }
 
     if (!formData.stateCity.trim()) {
-      newErrors.stateCity = 'State/City is required';
+      newErrors.stateCity = "State/City is required";
     }
 
     setErrors(newErrors);
@@ -62,12 +63,11 @@ const HomeInfo = () => {
       //   body: JSON.stringify(formData),
       // });
 
-      console.log('Home info submitted:', formData);
-      navigate('/quicksetup');
-      
+      console.log("Home info submitted:", formData);
+      navigate("/quicksetup");
     } catch (error) {
-      console.error('Error:', error);
-      setErrors({ submit: 'Failed to save information. Please try again.' });
+      console.error("Error:", error);
+      setErrors({ submit: "Failed to save information. Please try again." });
     } finally {
       setLoading(false);
     }
@@ -111,7 +111,7 @@ const HomeInfo = () => {
                 value={formData.primaryPowerSource}
                 onChange={handleChange}
                 placeholder="Primary Power Source"
-                className={`${styles.input} ${errors.primaryPowerSource ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.primaryPowerSource ? styles.inputError : ""}`}
               />
               {errors.primaryPowerSource && (
                 <p className={styles.errorText}>{errors.primaryPowerSource}</p>
@@ -125,7 +125,7 @@ const HomeInfo = () => {
                 value={formData.householdSize}
                 onChange={handleChange}
                 placeholder="Household Size"
-                className={`${styles.input} ${errors.householdSize ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.householdSize ? styles.inputError : ""}`}
               />
               {errors.householdSize && (
                 <p className={styles.errorText}>{errors.householdSize}</p>
@@ -139,7 +139,7 @@ const HomeInfo = () => {
                 value={formData.stateCity}
                 onChange={handleChange}
                 placeholder="State/City"
-                className={`${styles.input} ${errors.stateCity ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.stateCity ? styles.inputError : ""}`}
               />
               {errors.stateCity && (
                 <p className={styles.errorText}>{errors.stateCity}</p>
@@ -147,9 +147,7 @@ const HomeInfo = () => {
             </div>
 
             {errors.submit && (
-              <div className={styles.submitError}>
-                {errors.submit}
-              </div>
+              <div className={styles.submitError}>{errors.submit}</div>
             )}
 
             <button
@@ -157,7 +155,7 @@ const HomeInfo = () => {
               disabled={loading}
               className={styles.submitButton}
             >
-              {loading ? 'Saving...' : 'Continue'}
+              {loading ? "Saving..." : "Continue"}
             </button>
           </form>
         </div>

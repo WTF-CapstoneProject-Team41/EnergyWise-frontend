@@ -1,0 +1,251 @@
+.page {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #f0f4f3;
+}
+
+.bg {
+  position: fixed;
+  inset: 0;
+  background-image: url("../../../assets/Buy-Energy.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* opacity: 0.35; */
+  z-index: 0;
+}
+
+/* .page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(240, 244, 243, 0.5) 0%,
+    rgba(240, 244, 243, 0.2) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+} */
+
+/* Logo */
+.logoBar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 1.75rem;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoText {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1f1e;
+  letter-spacing: -0.02em;
+}
+
+/* Center */
+.center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card */
+.card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cardHeader {
+  text-align: center;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #1a1f1e;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Input */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #374151;
+  letter-spacing: 0.02em;
+}
+
+.inputWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 0.625rem;
+  padding: 0 1rem;
+  background: white;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.inputWrap:focus-within {
+  border-color: #1a7a5e;
+  box-shadow: 0 0 0 3px rgba(26, 122, 94, 0.08);
+}
+
+.inputWrapError {
+  border-color: #e05252;
+}
+
+.inputWrapError:focus-within {
+  border-color: #e05252;
+  box-shadow: 0 0 0 3px rgba(224, 82, 82, 0.08);
+}
+
+.inputIcon {
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0.875rem 0;
+  font-size: 0.975rem;
+  color: #1a1f1e;
+  background: transparent;
+  font-family: inherit;
+  letter-spacing: 0.04em;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+  letter-spacing: 0;
+}
+
+.errorText {
+  font-size: 0.78rem;
+  color: #e05252;
+  margin: 0;
+}
+
+/* Info note */
+.infoNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: rgba(26, 122, 94, 0.06);
+  border: 1px solid rgba(26, 122, 94, 0.15);
+  border-radius: 0.625rem;
+  padding: 0.75rem 1rem;
+}
+
+.infoNote svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.infoNote span {
+  font-size: 0.8rem;
+  color: #1a7a5e;
+  line-height: 1.5;
+}
+
+/* Action buttons */
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.875rem;
+}
+
+.btnAmber,
+.btnGreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: 0.625rem;
+  border: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  letter-spacing: -0.01em;
+}
+
+.btnAmber {
+  background: #f59e0b;
+  color: #1a1f1e;
+}
+
+.btnAmber:hover {
+  background: #d97706;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.3);
+}
+
+.btnGreen {
+  background: #1a7a5e;
+  color: white;
+}
+
+.btnGreen:hover {
+  background: #155f4a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(26, 122, 94, 0.25);
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 1.75rem 1.25rem;
+  }
+}

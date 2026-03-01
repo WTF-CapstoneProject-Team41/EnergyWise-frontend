@@ -1,0 +1,200 @@
+.page {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #f0f4f3;
+}
+
+/* Wind turbine background */
+.bg {
+  position: fixed;
+  inset: 0;
+  background-image: url("../../../assets/login-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* opacity: 0.35; */
+  z-index: 0;
+}
+
+/* Logo bar */
+.logoBar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 1.75rem;
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoText {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1f1e;
+  letter-spacing: -0.02em;
+}
+
+/* Centered content */
+.center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card */
+.card {
+  backdrop-filter: blur(16px);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 700px;
+}
+
+.cardHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.03em;
+  font-family: var(--font-heading);
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #000;
+  margin-bottom: 3rem;
+  font-family: var(--font-body);
+}
+
+/* Options row */
+.options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.upperCard {
+  background: #f9fafb;
+  margin-bottom: 4.5625rem;
+  border-radius: 1rem;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+  border: 1.5px solid #f0f4f3;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+.option:hover {
+  border-color: #1a7a5e;
+  box-shadow: 0 4px 16px rgba(26, 122, 94, 0.1);
+}
+
+.optionIconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.optionEmoji {
+  font-size: 2rem;
+}
+
+.optionTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  color: #000;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.optionDesc {
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.optionBtn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 0.625rem;
+  border: none;
+  font-weight: 500;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  margin-bottom: 7rem;
+}
+
+.optionBtnGreen {
+  background: var(--primary-color);
+  color: white;
+}
+
+.optionBtnGreen:hover {
+  background: #065e52;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(26, 122, 94, 0.25);
+}
+
+.optionBtnAmber {
+  background: #f59e0b;
+  color: #1a1f1e;
+}
+
+.optionBtnAmber:hover {
+  background: #d97706;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.25);
+}
+
+@media (max-width: 600px) {
+  .options {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .card {
+    padding: 1.75rem 1.25rem;
+  }
+}

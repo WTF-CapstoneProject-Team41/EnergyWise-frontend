@@ -546,6 +546,7 @@
   }
 }
 
+/* FEATURES */
 .features {
   padding: 6rem 2rem;
   background: white;
@@ -1028,6 +1029,10 @@
   .stats {
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .scrollIndicator {
+    display: none;
   }
 
   .sectionTitle {

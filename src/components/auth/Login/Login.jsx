@@ -76,7 +76,7 @@ const Login = () => {
       // We'll fetch user profile separately
       login({ identifier: formData.emailOrPhone }, token);
 
-      navigate("/homeinfo");
+      navigate("/user-type");
     } catch (error) {
       setErrors({
         submit: error.message || "Login failed. Please check your credentials.",

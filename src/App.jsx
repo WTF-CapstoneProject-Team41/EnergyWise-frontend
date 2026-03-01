@@ -8,8 +8,6 @@ import BuyEnergy from "./pages/BuyEnergy/BuyEnergy";
 import BuyEnergyOnboarding from "./pages/Onboarding/BuyEnergyOnboarding";
 import LogPurchase from "./pages/LogPurchase/LogPurchase";
 import LogPurchaseOnboarding from "./pages/Onboarding/LogPurchaseOnboarding";
-
-// New pages
 import Landing from "./components/auth/LandingPage/LandingPage";
 import Login from "./components/auth/Login/Login";
 import SignUp from "./components/auth/SignUp/SignUp";
@@ -17,6 +15,8 @@ import HomeInfo from "./components/auth/HomeInfo/HomeInfo";
 import BusinessInfo from "./components/auth/BusinessInfo/BusinessInfo";
 import QuickSetup from "./components/auth/QuickSetup/QuickSetup";
 import ProtectedRoute from "./components/auth/ProtectedRoute/ProtectedRoute";
+import UserTypeSelect from "./components/auth/UserTypeSelect/UserType";
+import MeterSetup from "./components/auth/MeterSetup/MeterSetup";
 
 // Stub pages to be replaced with real components
 
@@ -43,6 +43,22 @@ function App() {
           }
         />
         <Route
+          path="/user-type"
+          element={
+            <ProtectedRoute>
+              <UserTypeSelect />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/meter-setup"
+          element={
+            <ProtectedRoute>
+              <MeterSetup />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/businessinfo"
           element={
             <ProtectedRoute>
@@ -60,11 +76,19 @@ function App() {
         />
         <Route
           path="/onboarding/buy-energy"
-          element={<BuyEnergyOnboarding />}
+          element={
+            <ProtectedRoute>
+              <BuyEnergyOnboarding />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/onboarding/log-purchase"
-          element={<LogPurchaseOnboarding />}
+          element={
+            <ProtectedRoute>
+              <LogPurchaseOnboarding />
+            </ProtectedRoute>
+          }
         />
 
         <Route

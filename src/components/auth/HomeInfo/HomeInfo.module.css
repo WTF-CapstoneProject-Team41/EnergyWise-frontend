@@ -10,15 +10,13 @@
 }
 
 .backgroundDecoration {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 50%;
-  opacity: 0.1;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2310b981' d='M45.5,-57.8C58.1,-45.5,67.2,-30.3,71.8,-13.5C76.4,3.3,76.5,21.7,68.9,36.5C61.3,51.3,46,62.5,29.5,68.1C13,73.7,-4.7,73.7,-21.2,68.5C-37.7,63.3,-52.9,52.9,-63.5,38.7C-74.1,24.5,-80.1,6.5,-78.3,-11.1C-76.5,-28.7,-67,-45.9,-53.2,-58.1C-39.4,-70.3,-21.4,-77.5,-3.2,-73.6C15,-69.7,32.9,-70.1,45.5,-57.8Z' transform='translate(100 100)' /%3E%3C/svg%3E");
-  background-size: contain;
+  position: fixed;
+  inset: 0;
+  background-position: center;
+  background-image: url("../../../assets/Buy-Energy.png");
+  background-size: cover;
   background-repeat: no-repeat;
+  z-index: 0;
 }
 
 .wrapper {
@@ -58,9 +56,11 @@
 }
 
 .card {
-  background-color: white;
+  /* background-color: white; */
   border-radius: 1rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
   padding: 2rem;
 }
 
@@ -169,7 +169,7 @@
   .card {
     padding: 1.5rem;
   }
-  
+
   .logo {
     margin-bottom: 1.5rem;
   }

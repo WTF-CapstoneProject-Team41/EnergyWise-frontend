@@ -69,11 +69,8 @@ const Login = () => {
         throw new Error(data.message || "Login failed");
       }
 
-      // Token is at data.data.token
       const token = data.data.token;
 
-      // No user info in response yet — store what we have
-      // We'll fetch user profile separately
       login({ identifier: formData.emailOrPhone }, token);
 
       navigate("/user-type");

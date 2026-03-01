@@ -92,12 +92,17 @@ const SignUp = () => {
 
       const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.message || "Signup failed");
+      if (response.ok) {
+        navigate("/login");
+        return;
       }
 
-      // Signup successful — go to login
-      navigate("/login");
+      if (response.status === 400 && data.message === "User already exists") {
+        setErrors({ submit: "User already exists. Please login instead." });
+        return;
+      }
+
+      throw new Error(data.message || "Signup failed");
     } catch (error) {
       setErrors({
         submit: error.message || "Signup failed. Please try again.",

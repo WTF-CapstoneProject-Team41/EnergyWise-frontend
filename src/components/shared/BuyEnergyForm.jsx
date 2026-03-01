@@ -117,24 +117,19 @@ function BuyEnergyForm({ variant }) {
     setError(null);
 
     try {
-      console.log(
-        "activeKwh:",
-        activeKwh,
-        "rate:",
-        rate,
-        "totalAmount:",
-        totalAmount,
-      );
-      // Step 1 — open Paystack popup directly
       openPaystackPopup({
         email: userEmail,
         amount: totalAmount,
 
         onSuccess: async (reference) => {
+          // console.log("Paystack reference:", reference);
           try {
-            const { data } = await paymentsAPI.verify(reference);
-            // data.units_credited, data.new_balance
-            setUnitsCredited(data.units_credited);
+            const { data } = await paymentsAPI.verify(
+              reference,
+              activeKwh,
+              totalAmount,
+            );
+            setUnitsCredited(data.units_purchased);
             setNewBalance(data.new_balance);
             setShowSuccess(true);
           } catch (err) {
@@ -144,7 +139,7 @@ function BuyEnergyForm({ variant }) {
               setError("Session expired. Please log in again.");
             } else {
               setError(
-                "Payment went through but verification failed. Contact support.",
+                "Payment went through but logging failed. Contact support.",
               );
             }
           } finally {
@@ -283,7 +278,7 @@ function BuyEnergyForm({ variant }) {
       </div>
       {/* Payment success modal */}
       {showSuccess && (
-        <div className={styles.modalOverlay} onClick={handleDone}>
+        <div className={styles.modalOverlay}>
           <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
             {/* Title */}
             <h2 className={styles.modalTitle}>Payment Successful!</h2>

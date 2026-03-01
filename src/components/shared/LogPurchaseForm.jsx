@@ -94,7 +94,7 @@ function LogPurchaseForm({ variant }) {
     try {
       const token = localStorage.getItem("ew_token");
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/purchase/log`,
+        `${import.meta.env.VITE_API_URL}/energy-purchases`,
         {
           method: "POST",
           headers: {
@@ -102,10 +102,10 @@ function LogPurchaseForm({ variant }) {
             Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            purchaseDate: formData.purchaseDate,
-            amountPaid: Number(formData.amountPaid),
-            unitsReceived: Number(formData.unitsReceived),
-            source: formData.source,
+            units_purchased: Number(unitsReceived),
+            amount_paid: Number(amountPaid),
+            source: "MANUAL",
+            token_id: "",
           }),
         },
       );

@@ -6,6 +6,7 @@ const MeterSetup = () => {
   const navigate = useNavigate();
   const [meterNumber, setMeterNumber] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setMeterNumber(e.target.value);
@@ -24,17 +25,49 @@ const MeterSetup = () => {
     return true;
   };
 
-  const handleBuyEnergy = () => {
-    if (!validate()) return;
-    // Store meter number for use in onboarding
-    sessionStorage.setItem("ew_meter", meterNumber.trim());
-    navigate("/onboarding/buy-energy");
+  const createEnergyAccount = async () => {
+    const token = localStorage.getItem("ew_token");
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/energy-account`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          meter_number: meterNumber.trim(),
+          base_tariff: 0.75,
+        }),
+      },
+    );
+    const data = await response.json();
+    if (!response.ok)
+      throw new Error(data.message || "Failed to create account");
   };
 
-  const handleLogPurchase = () => {
+  const handleBuyEnergy = async () => {
     if (!validate()) return;
-    sessionStorage.setItem("ew_meter", meterNumber.trim());
-    navigate("/onboarding/log-purchase");
+    setError("");
+    try {
+      await createEnergyAccount();
+      sessionStorage.setItem("ew_meter", meterNumber.trim());
+      navigate("/onboarding/buy-energy");
+    } catch (err) {
+      setError(err.message || "Something went wrong. Please try again.");
+    }
+  };
+
+  const handleLogPurchase = async () => {
+    if (!validate()) return;
+    setError("");
+    try {
+      await createEnergyAccount();
+      sessionStorage.setItem("ew_meter", meterNumber.trim());
+      navigate("/onboarding/log-purchase");
+    } catch (err) {
+      setError(err.message || "Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -130,38 +163,19 @@ const MeterSetup = () => {
 
           {/* Action buttons */}
           <div className={styles.actions}>
-            <button className={styles.btnAmber} onClick={handleBuyEnergy}>
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-              Buy Energy
+            <button
+              className={styles.btnAmber}
+              onClick={handleBuyEnergy}
+              disabled={loading}
+            >
+              {loading ? "Setting up..." : "Buy Energy"}
             </button>
-            <button className={styles.btnGreen} onClick={handleLogPurchase}>
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <polyline points="14 2 14 8 20 8" />
-                <line x1="12" y1="18" x2="12" y2="12" />
-                <line x1="9" y1="15" x2="15" y2="15" />
-              </svg>
-              Log Purchase
+            <button
+              className={styles.btnGreen}
+              onClick={handleLogPurchase}
+              disabled={loading}
+            >
+              {loading ? "Setting up..." : "Log Purchase"}
             </button>
           </div>
         </div>

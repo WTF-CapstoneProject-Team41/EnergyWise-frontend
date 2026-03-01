@@ -63,6 +63,8 @@ function LogPurchaseForm({ variant }) {
   const [unitsBalance, setUnitsBalance] = useState("");
   const [source, setSource] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // derived values
   const units = Number(unitsReceived) || 0;
@@ -77,12 +79,47 @@ function LogPurchaseForm({ variant }) {
       navigate("/my-energy");
     }
   };
+  const handleDone = () => {
+    if (variant === "onboarding") {
+      navigate("/quicksetup");
+    } else {
+      navigate("/my-energy");
+    }
+  };
 
-  const handleContinue = () => {
-    //post to backend
-    //POST api/purchase/log
-    //{purchaseDate, amountPaid, unitsReceived, source }
-    setShowSuccess(true);
+  const handleContinue = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const token = localStorage.getItem("ew_token");
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/purchase/log`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            purchaseDate: formData.purchaseDate,
+            amountPaid: Number(formData.amountPaid),
+            unitsReceived: Number(formData.unitsReceived),
+            source: formData.source,
+          }),
+        },
+      );
+
+      const data = await response.json();
+      if (!response.ok)
+        throw new Error(data.message || "Failed to log purchase");
+
+      setShowSuccess(true);
+    } catch (err) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -228,6 +265,17 @@ function LogPurchaseForm({ variant }) {
         >
           Continue
         </button>
+        {error && (
+          <p
+            style={{
+              color: "#e05252",
+              fontSize: "0.85rem",
+              textAlign: "center",
+            }}
+          >
+            {error}
+          </p>
+        )}
       </div>
       {/* Success modal */}
       {showSuccess && (
@@ -269,10 +317,7 @@ function LogPurchaseForm({ variant }) {
             </div>
 
             {/* Done button */}
-            <button
-              className={styles.doneBtn}
-              onClick={() => navigate("/my-energy")}
-            >
+            <button className={styles.doneBtn} onClick={handleDone}>
               Done
             </button>
           </div>

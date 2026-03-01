@@ -99,7 +99,7 @@ function BuyEnergyForm({ variant }) {
   };
   const handleDone = () => {
     if (variant === "onboarding") {
-      navigate("/dashboard");
+      navigate("/quicksetup");
     } else {
       navigate("/my-energy");
     }
@@ -305,7 +305,6 @@ function BuyEnergyForm({ variant }) {
               </div>
             </div>
 
-            {/* Instead of token, show what was credited */}
             <div
               style={{
                 textAlign: "center",

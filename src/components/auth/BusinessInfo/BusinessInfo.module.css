@@ -1,14 +1,11 @@
-.container {
+.page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
+  width: 100%;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #f0f4f3;
 }
-
 .backgroundDecoration {
   position: fixed;
   inset: 0;
@@ -18,41 +15,37 @@
   background-repeat: no-repeat;
   z-index: 0;
 }
-
-.wrapper {
-  width: 100%;
-  max-width: 448px;
+/* Logo bar */
+.logoBar {
   position: relative;
   z-index: 1;
-}
-
-.logo {
-  margin-bottom: 2rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 1.25rem 1.75rem;
 }
 
 .logoIcon {
-  width: 2rem;
-  height: 2rem;
-  background-color: #059669;
-  border-radius: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.logoSvg {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: white;
+.logoText {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1f1e;
+  letter-spacing: -0.02em;
 }
 
-.logoText {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1f2937;
+.wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .card {

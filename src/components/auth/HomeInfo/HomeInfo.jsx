@@ -38,6 +38,9 @@ const HomeInfo = () => {
       newErrors.householdSize = "Household size is required";
     }
 
+    if (!formData.country.trim()) {
+      newErrors.stateCity = "Country is required";
+    }
     if (!formData.stateCity.trim()) {
       newErrors.stateCity = "State/City is required";
     }
@@ -56,15 +59,27 @@ const HomeInfo = () => {
     setLoading(true);
 
     try {
-      // TODO: Send to backend
-      // const response = await fetch('YOUR_BACKEND_ENDPOINT/onboarding/home', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
-
+      const token = localStorage.getItem("ew_token");
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/profile`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            primary_power_source: formData.primaryPowerSource,
+            household_size: Number(formData.householdSize),
+            city: formData.stateCity,
+            country: formData.country,
+          }),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Failed to save");
       console.log("Home info submitted:", formData);
-      navigate("/quicksetup");
+      navigate("/meter-setup");
     } catch (error) {
       console.error("Error:", error);
       setErrors({ submit: "Failed to save information. Please try again." });
@@ -74,29 +89,30 @@ const HomeInfo = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.page}>
       <div className={styles.backgroundDecoration}></div>
+      {/* Logo */}
+      <div className={styles.logoBar}>
+        <div className={styles.logoIcon}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            fill="none"
+          >
+            <rect width="36" height="36" fill="#008070" rx="10" />
+            <path
+              fill="#f59e0b"
+              stroke="#f59e0b"
+              strokeWidth=".04"
+              d="m22.47 9.02-1.56 6.27-.005.027h4.477L14.46 26.93l2.444-9.82.007-.027H13.31l2.006-8.058z"
+            />
+          </svg>
+        </div>
+        <span className={styles.logoText}>EnergyWise</span>
+      </div>
 
       <div className={styles.wrapper}>
-        <div className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <svg
-              className={styles.logoSvg}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 10V3L4 14h7v7l9-11h-7z"
-              />
-            </svg>
-          </div>
-          <span className={styles.logoText}>EnergyWise</span>
-        </div>
-
         <div className={styles.card}>
           <div className={styles.header}>
             <h1 className={styles.title}>My Home</h1>
@@ -129,6 +145,19 @@ const HomeInfo = () => {
               />
               {errors.householdSize && (
                 <p className={styles.errorText}>{errors.householdSize}</p>
+              )}
+            </div>
+            <div className={styles.formGroup}>
+              <input
+                type="text"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                placeholder="Country"
+                className={styles.input}
+              />
+              {errors.country && (
+                <p className={styles.errorText}>{errors.country}</p>
               )}
             </div>
 

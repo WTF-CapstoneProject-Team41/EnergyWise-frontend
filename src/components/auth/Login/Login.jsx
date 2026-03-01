@@ -87,29 +87,30 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.backgroundDecoration}></div>
+    <div className={styles.page}>
+      <div className={styles.backgroundDecoration} />
+      {/* Logo */}
+      <div className={styles.logoBar}>
+        <div className={styles.logoIcon}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            fill="none"
+          >
+            <rect width="36" height="36" fill="#008070" rx="10" />
+            <path
+              fill="#f59e0b"
+              stroke="#f59e0b"
+              strokeWidth=".04"
+              d="m22.47 9.02-1.56 6.27-.005.027h4.477L14.46 26.93l2.444-9.82.007-.027H13.31l2.006-8.058z"
+            />
+          </svg>
+        </div>
+        <span className={styles.logoText}>EnergyWise</span>
+      </div>
 
       <div className={styles.wrapper}>
-        <div className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <svg
-              className={styles.logoSvg}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 10V3L4 14h7v7l9-11h-7z"
-              />
-            </svg>
-          </div>
-          <span className={styles.logoText}>EnergyWise</span>
-        </div>
-
         <div className={styles.card}>
           <div className={styles.header}>
             <h1 className={styles.title}>Log in</h1>

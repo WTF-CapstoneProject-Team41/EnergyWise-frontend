@@ -1,42 +1,43 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styles from './BusinessInfo.module.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styles from "./BusinessInfo.module.css";
 
 const BusinessInfo = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    businessName: '',
-    businessType: '',
-    avgMonthlyConsumption: '',
-    primaryPowerSource: '',
-    stateCity: ''
+    businessName: "",
+    businessType: "",
+    avgMonthlyConsumption: "",
+    primaryPowerSource: "",
+    country: "",
+    stateCity: "",
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const businessTypes = [
-    'Select Business Type',
-    'Retail',
-    'Restaurant/Food Service',
-    'Manufacturing',
-    'Office/Corporate',
-    'Healthcare',
-    'Education',
-    'Hospitality',
-    'Technology',
-    'Other'
+    "Select Business Type",
+    "Retail",
+    "Restaurant/Food Service",
+    "Manufacturing",
+    "Office/Corporate",
+    "Healthcare",
+    "Education",
+    "Hospitality",
+    "Technology",
+    "Other",
   ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: "",
       }));
     }
   };
@@ -45,23 +46,30 @@ const BusinessInfo = () => {
     const newErrors = {};
 
     if (!formData.businessName.trim()) {
-      newErrors.businessName = 'Business name is required';
+      newErrors.businessName = "Business name is required";
     }
 
-    if (!formData.businessType || formData.businessType === 'Select Business Type') {
-      newErrors.businessType = 'Please select a business type';
+    if (
+      !formData.businessType ||
+      formData.businessType === "Select Business Type"
+    ) {
+      newErrors.businessType = "Please select a business type";
     }
 
     if (!formData.avgMonthlyConsumption.trim()) {
-      newErrors.avgMonthlyConsumption = 'Average monthly consumption is required';
+      newErrors.avgMonthlyConsumption =
+        "Average monthly consumption is required";
     }
 
     if (!formData.primaryPowerSource.trim()) {
-      newErrors.primaryPowerSource = 'Primary power source is required';
+      newErrors.primaryPowerSource = "Primary power source is required";
+    }
+    if (!formData.country.trim()) {
+      newErrors.stateCity = "Country is required";
     }
 
     if (!formData.stateCity.trim()) {
-      newErrors.stateCity = 'State/City is required';
+      newErrors.stateCity = "State/City is required";
     }
 
     setErrors(newErrors);
@@ -78,48 +86,62 @@ const BusinessInfo = () => {
     setLoading(true);
 
     try {
-      // TODO: Send to backend
-      // const response = await fetch('YOUR_BACKEND_ENDPOINT/onboarding/business', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
+      const token = localStorage.getItem("ew_token");
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/users/profile`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            business_name: formData.businessName,
+            business_type: formData.businessType,
+            primary_power_source: formData.primaryPowerSource,
+            city: formData.stateCity,
+            country: formData.country,
+          }),
+        },
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Failed to save");
 
-      console.log('Business info submitted:', formData);
-      navigate('/login');
-      
+      console.log("Business info submitted:", formData);
+      navigate("/meter-setup");
     } catch (error) {
-      console.error('Error:', error);
-      setErrors({ submit: 'Failed to save information. Please try again.' });
+      console.error("Error:", error);
+      setErrors({ submit: "Failed to save information. Please try again." });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.page}>
       <div className={styles.backgroundDecoration}></div>
+      {/* Logo */}
+      <div className={styles.logoBar}>
+        <div className={styles.logoIcon}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="36"
+            height="36"
+            fill="none"
+          >
+            <rect width="36" height="36" fill="#008070" rx="10" />
+            <path
+              fill="#f59e0b"
+              stroke="#f59e0b"
+              strokeWidth=".04"
+              d="m22.47 9.02-1.56 6.27-.005.027h4.477L14.46 26.93l2.444-9.82.007-.027H13.31l2.006-8.058z"
+            />
+          </svg>
+        </div>
+        <span className={styles.logoText}>EnergyWise</span>
+      </div>
 
       <div className={styles.wrapper}>
-        <div className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <svg
-              className={styles.logoSvg}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 10V3L4 14h7v7l9-11h-7z"
-              />
-            </svg>
-          </div>
-          <span className={styles.logoText}>EnergyWise</span>
-        </div>
-
         <div className={styles.card}>
           <div className={styles.header}>
             <h1 className={styles.title}>My Business</h1>
@@ -134,7 +156,7 @@ const BusinessInfo = () => {
                 value={formData.businessName}
                 onChange={handleChange}
                 placeholder="Business Name"
-                className={`${styles.input} ${errors.businessName ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.businessName ? styles.inputError : ""}`}
               />
               {errors.businessName && (
                 <p className={styles.errorText}>{errors.businessName}</p>
@@ -146,7 +168,7 @@ const BusinessInfo = () => {
                 name="businessType"
                 value={formData.businessType}
                 onChange={handleChange}
-                className={`${styles.select} ${errors.businessType ? styles.inputError : ''}`}
+                className={`${styles.select} ${errors.businessType ? styles.inputError : ""}`}
               >
                 {businessTypes.map((type, index) => (
                   <option key={index} value={type} disabled={index === 0}>
@@ -166,10 +188,12 @@ const BusinessInfo = () => {
                 value={formData.avgMonthlyConsumption}
                 onChange={handleChange}
                 placeholder="Average Monthly Consumption (kWh)"
-                className={`${styles.input} ${errors.avgMonthlyConsumption ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.avgMonthlyConsumption ? styles.inputError : ""}`}
               />
               {errors.avgMonthlyConsumption && (
-                <p className={styles.errorText}>{errors.avgMonthlyConsumption}</p>
+                <p className={styles.errorText}>
+                  {errors.avgMonthlyConsumption}
+                </p>
               )}
             </div>
 
@@ -180,7 +204,7 @@ const BusinessInfo = () => {
                 value={formData.primaryPowerSource}
                 onChange={handleChange}
                 placeholder="Primary Power Source"
-                className={`${styles.input} ${errors.primaryPowerSource ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.primaryPowerSource ? styles.inputError : ""}`}
               />
               {errors.primaryPowerSource && (
                 <p className={styles.errorText}>{errors.primaryPowerSource}</p>
@@ -194,7 +218,7 @@ const BusinessInfo = () => {
                 value={formData.stateCity}
                 onChange={handleChange}
                 placeholder="State/City"
-                className={`${styles.input} ${errors.stateCity ? styles.inputError : ''}`}
+                className={`${styles.input} ${errors.stateCity ? styles.inputError : ""}`}
               />
               {errors.stateCity && (
                 <p className={styles.errorText}>{errors.stateCity}</p>
@@ -202,9 +226,7 @@ const BusinessInfo = () => {
             </div>
 
             {errors.submit && (
-              <div className={styles.submitError}>
-                {errors.submit}
-              </div>
+              <div className={styles.submitError}>{errors.submit}</div>
             )}
 
             <button
@@ -212,7 +234,7 @@ const BusinessInfo = () => {
               disabled={loading}
               className={styles.submitButton}
             >
-              {loading ? 'Saving...' : 'Continue'}
+              {loading ? "Saving..." : "Continue"}
             </button>
           </form>
         </div>

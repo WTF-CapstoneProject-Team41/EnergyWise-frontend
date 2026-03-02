@@ -1,57 +1,51 @@
-.container {
+.page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-  padding: 2rem 1rem;
-  position: relative;
-  overflow-x: hidden;
+  width: 100%;
+  /* position: relative; */
+  display: flex;
+  flex-direction: column;
+  background: #f0f4f3;
 }
 
 .backgroundDecoration {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 50%;
-  opacity: 0.1;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2310b981' d='M45.5,-57.8C58.1,-45.5,67.2,-30.3,71.8,-13.5C76.4,3.3,76.5,21.7,68.9,36.5C61.3,51.3,46,62.5,29.5,68.1C13,73.7,-4.7,73.7,-21.2,68.5C-37.7,63.3,-52.9,52.9,-63.5,38.7C-74.1,24.5,-80.1,6.5,-78.3,-11.1C-76.5,-28.7,-67,-45.9,-53.2,-58.1C-39.4,-70.3,-21.4,-77.5,-3.2,-73.6C15,-69.7,32.9,-70.1,45.5,-57.8Z' transform='translate(100 100)' /%3E%3C/svg%3E");
-  background-size: contain;
+  position: fixed;
+  inset: 0;
+  background-position: center;
+  background-image: url("../../../assets/Buy-Energy.png");
+  background-size: cover;
   background-repeat: no-repeat;
+  z-index: 0;
 }
-
-.wrapper {
-  max-width: 1100px;
-  margin: 0 auto;
-  position: relative;
+/* Logo bar */
+.logoBar {
+  /* position: relative; */
   z-index: 1;
-}
-
-.logo {
-  margin-bottom: 2rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  padding: 1.25rem 1.75rem;
 }
 
 .logoIcon {
-  width: 2rem;
-  height: 2rem;
-  background-color: #10b981;
-  border-radius: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.logoSvg {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: white;
+.logoText {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1f1e;
+  letter-spacing: -0.02em;
 }
 
-.logoText {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #1f2937;
+.wrapper {
+  width: 100%;
+  max-width: 930px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  padding: 3rem 2rem 2.25rem 2rem;
 }
 
 .content {
@@ -59,15 +53,17 @@
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #000;
   margin: 0 0 0.5rem 0;
+  font-family: var(--font-heading);
 }
 
 .subtitle {
-  font-size: 0.9375rem;
-  color: #6b7280;
+  font-size: 0.875rem;
+  font-family: var(--font-body);
+  color: #000;
   margin: 0 0 3rem 0;
   max-width: 600px;
   margin-left: auto;
@@ -79,9 +75,10 @@
 }
 
 .sectionTitle {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #1f2937;
+  color: #000;
+  font-family: var(--font-heading);
   margin: 0 0 1.5rem 0;
   text-align: left;
 }
@@ -94,39 +91,41 @@
 
 .applianceButton {
   position: relative;
-  background-color: white;
-  border: 2px solid #e5e7eb;
-  border-radius: 0.75rem;
-  padding: 1.25rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--Teal-green-100, #cffcf6);
+  background: var(--Blue-50, #f5f9ff);
+  padding: 0.75rem;
   cursor: pointer;
   transition: all 0.2s;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
 }
 
 .applianceButton:hover {
-  border-color: #10b981;
-  background-color: #f0fdf4;
+  border-color: #09907f;
+  background-color: rgba(10, 221, 193, 0.164);
   transform: translateY(-2px);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
 .applianceButtonActive {
-  border-color: #10b981;
-  background-color: #d1fae5;
+  border-color: #09907f;
+  background-color: #1e887c85;
 }
 
 .applianceIcon {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .applianceName {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #374151;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #000;
   text-align: center;
+  font-family: var(--font-body);
 }
 
 .checkmark {
@@ -135,7 +134,7 @@
   right: 0.5rem;
   width: 1.25rem;
   height: 1.25rem;
-  background-color: #10b981;
+  background-color: #09907f;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -155,7 +154,7 @@
   background-color: white;
   border: 2px solid #e5e7eb;
   border-radius: 0.75rem;
-  padding: 1.5rem;
+  padding: 1.5rem 2.5rem;
   text-align: left;
 }
 
@@ -163,7 +162,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 2.5rem;
 }
 
 .cardIcon {
@@ -171,9 +170,9 @@
 }
 
 .cardName {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  color: #1f2937;
+  color: #000;
 }
 
 .cardInputs {
@@ -185,38 +184,43 @@
 
 .inputGroup {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.9375rem;
 }
 
 .inputLabel {
   font-size: 0.875rem;
+  /* margin-bottom: 0.875rem; */
   font-weight: 600;
-  color: #374151;
+  color: #000;
 }
 
 .input {
   width: 100%;
-  padding: 0.625rem 0.875rem;
-  background-color: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 0.5rem;
-  font-size: 0.9375rem;
-  color: #1f2937;
+  padding: 1.25rem;
+  background-color: #fafafa;
+  border: 1px solid #b7b1ac;
+  border-radius: 1rem;
+  font-size: 1rem;
+  color: #b7b1ac;
   transition: all 0.2s;
   outline: none;
   font-family: inherit;
+  margin-top: 0.875rem;
+  margin-bottom: 0.375rem;
 }
 
 .input:focus {
   background-color: white;
-  border-color: #10b981;
+  border-color: #09907f;
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
 }
 
 .inputHint {
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: #404040;
+  font-family: var(--font-body);
+  line-height: 140%; /* 16.8px */
+  letter-spacing: 0.96px;
   margin: 0;
 }
 
@@ -224,25 +228,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
-  border-top: 1px solid #e5e7eb;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 2px solid #066055;
+  margin-top: 2.5rem;
 }
 
 .usageLabel {
-  font-size: 0.875rem;
-  color: #6b7280;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  color: #066055;
 }
 
 .usageValue {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #10b981;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  color: #066055;
 }
 
 .continueButton {
   width: 100%;
   max-width: 400px;
-  background-color: #10b981;
+  background-color: var(--primary-color);
   color: white;
   font-weight: 500;
   padding: 0.875rem 2rem;

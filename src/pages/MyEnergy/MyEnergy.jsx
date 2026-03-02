@@ -3,11 +3,13 @@ import styles from "./MyEnergy.module.css";
 import EnergyUnits from "./tabs/EnergyUnits";
 import Appliances from "./tabs/Appliances";
 import PurchaseHistory from "./tabs/PurchaseHistory";
+import { useUser } from "../../context/UserContext";
 
 const TABS = ["Energy Units", "Appliances", "Purchase History"];
 
 function MyEnergy() {
   const [activeTab, setActiveTab] = useState("Energy Units");
+  const { user } = useUser();
   return (
     <div className={styles.page}>
       <div className={styles.header}>
@@ -17,7 +19,7 @@ function MyEnergy() {
             Manage your energy units and appliances
           </p>
         </div>
-        <div className={styles.avatar}>SA</div>
+        <div className={styles.avatar}>{user?.initials || "U"}</div>
       </div>
       <div className={styles.tabs}>
         {TABS.map((tab) => (

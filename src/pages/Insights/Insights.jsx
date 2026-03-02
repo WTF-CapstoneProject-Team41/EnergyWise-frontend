@@ -2,7 +2,7 @@ import { useState } from "react";
 import ForecastTab from "./tabs/ForecastTab";
 import TrendsTab from "./tabs/TrendsTab";
 import RecommendationsTab from "./tabs/RecommendationsTab";
-import { useUser } from "../../Hooks/useUser";
+import { useUser } from "../../context/UserContext";
 import styles from "./Insights.module.css";
 
 const TABS = [

@@ -1,9 +1,9 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, Tooltip } from "recharts";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import { useGreeting } from "../../Hooks/useGreeting";
-import { useUser } from "../../Hooks/useUser";
 import styles from "./Dashboard.module.css";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
 
 const monthlyConsumption = [
   { m: "Jan", v: 38 },
@@ -233,7 +233,8 @@ function CustomTooltip({ active, payload, label }) {
 }
 
 /* ── Search + Avatar ──────────────────────────────── */
-function SearchAndAvatar({ initials }) {
+function SearchAndAvatar() {
+  const { user } = useUser();
   return (
     <>
       <div className={styles.search}>
@@ -248,7 +249,7 @@ function SearchAndAvatar({ initials }) {
         </svg>
         <input placeholder="Search...." />
       </div>
-      <div className={styles.avatar}>{initials}</div>
+      <div className={styles.avatar}>{user?.initials || "U"}</div>
     </>
   );
 }

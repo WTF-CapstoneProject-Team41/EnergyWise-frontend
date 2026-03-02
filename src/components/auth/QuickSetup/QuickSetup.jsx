@@ -65,6 +65,13 @@ const QuickSetup = () => {
       defaultPower: 1000,
       defaultHours: 0.5,
     },
+    {
+      id: "socket",
+      name: "Other Appliances",
+
+      defaultPower: 2000,
+      defaultHours: 10,
+    },
   ];
 
   const handleApplianceClick = (appliance) => {

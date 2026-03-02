@@ -70,6 +70,16 @@ const Login = () => {
       }
 
       const token = data.data.token;
+      const savedName = JSON.parse(localStorage.getItem("ew_name") || "{}");
+
+      login(
+        {
+          identifier: formData.emailOrPhone,
+          firstName: savedName.firstName || "",
+          lastName: savedName.lastName || "",
+        },
+        token,
+      );
 
       login({ identifier: formData.emailOrPhone }, token);
 

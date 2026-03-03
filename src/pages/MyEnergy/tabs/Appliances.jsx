@@ -153,6 +153,16 @@ function DeleteIcon() {
 //     cost: "₦396",
 //   },
 // ];
+const CHART_COLORS = [
+  "#09907f", // teal
+  "#f59e0b", // amber
+  "#3b82f6", // blue
+  "#8b5cf6", // purple
+  "#ef4444", // red
+  "#06b6d4", // cyan
+  "#f97316", // orange
+  "#84cc16", // lime
+];
 
 function DonutLabel() {
   return (
@@ -175,13 +185,13 @@ function Appliances() {
     (sum, a) => sum + (a.wattage * a.hours_per_day * a.duty_cycle) / 1000,
     0,
   );
-  const donutData = appliances.map((a) => ({
+  const donutData = appliances.map((a, index) => ({
     name: a.appliance_type,
     value:
       Math.round(
         ((a.wattage * a.hours_per_day * a.duty_cycle) / 1000 / totalKwh) * 100,
       ) || 0,
-    fill: "#09907f",
+    fill: CHART_COLORS[index % CHART_COLORS.length],
   }));
 
   useEffect(() => {

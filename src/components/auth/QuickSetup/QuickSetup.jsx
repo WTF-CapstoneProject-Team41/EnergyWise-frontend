@@ -42,7 +42,7 @@ const QuickSetup = () => {
       defaultHours: 0.25,
     },
 
-    { id: "fan", name: "Fan", icon: "🌀", defaultPower: 75, defaultHours: 12 },
+    { id: "fan", name: "Fan", defaultPower: 75, defaultHours: 12 },
     {
       id: "ac",
       name: "Air Conditioner",

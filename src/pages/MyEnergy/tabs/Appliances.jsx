@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Appliances.module.css";
 import { PieChart, Pie, Tooltip, ResponsiveContainer } from "recharts";
 
-const DONUT_DATA = [
-  { name: "Air Conditioner", value: 60, fill: "#10b981" },
-  { name: "Refrigerator", value: 18, fill: "#F59E0B" },
-  { name: "Others", value: 22, fill: "#E2E8F0" },
-];
+// const DONUT_DATA = [
+//   { name: "Air Conditioner", value: 60, fill: "#10b981" },
+//   { name: "Refrigerator", value: 18, fill: "#F59E0B" },
+//   { name: "Others", value: 22, fill: "#E2E8F0" },
+// ];
 
 // Appliance icon SVG
 function ApplianceIcon() {
@@ -115,44 +115,44 @@ function DeleteIcon() {
     </svg>
   );
 }
-const INITIAL_APPLIANCES = [
-  {
-    id: 1,
-    appl: "Air Conditioner",
-    location: "Main bedroom",
-    specs: "1500W · 8 hrs/day",
-    usage: "12 kWh",
-    contribution: 60,
-    cost: "₦1,320",
-  },
-  {
-    id: 2,
-    appl: "Refrigerator",
-    location: "Kitchen",
-    specs: "150W · 8 hrs/day",
-    usage: "3.6 kWh",
-    contribution: 18,
-    cost: "₦396",
-  },
-  {
-    id: 3,
-    appl: "Refrigerator",
-    location: "Kitchen",
-    specs: "150W · 8 hrs/day",
-    usage: "3.6 kWh",
-    contribution: 18,
-    cost: "₦396",
-  },
-  {
-    id: 4,
-    appl: "Refrigerator",
-    location: "Kitchen",
-    specs: "150W · 8 hrs/day",
-    usage: "3.6 kWh",
-    contribution: 18,
-    cost: "₦396",
-  },
-];
+// const INITIAL_APPLIANCES = [
+//   {
+//     id: 1,
+//     appl: "Air Conditioner",
+//     location: "Main bedroom",
+//     specs: "1500W · 8 hrs/day",
+//     usage: "12 kWh",
+//     contribution: 60,
+//     cost: "₦1,320",
+//   },
+//   {
+//     id: 2,
+//     appl: "Refrigerator",
+//     location: "Kitchen",
+//     specs: "150W · 8 hrs/day",
+//     usage: "3.6 kWh",
+//     contribution: 18,
+//     cost: "₦396",
+//   },
+//   {
+//     id: 3,
+//     appl: "Refrigerator",
+//     location: "Kitchen",
+//     specs: "150W · 8 hrs/day",
+//     usage: "3.6 kWh",
+//     contribution: 18,
+//     cost: "₦396",
+//   },
+//   {
+//     id: 4,
+//     appl: "Refrigerator",
+//     location: "Kitchen",
+//     specs: "150W · 8 hrs/day",
+//     usage: "3.6 kWh",
+//     contribution: 18,
+//     cost: "₦396",
+//   },
+// ];
 
 function DonutLabel() {
   return (
@@ -168,11 +168,53 @@ function DonutLabel() {
 }
 
 function Appliances() {
-  const [appliances, setAppliances] = useState(INITIAL_APPLIANCES);
+  const [appliances, setAppliances] = useState([]);
+  const [dashData, setDashData] = useState(null);
   const navigate = useNavigate();
+  const totalKwh = appliances.reduce(
+    (sum, a) => sum + (a.wattage * a.hours_per_day * a.duty_cycle) / 1000,
+    0,
+  );
+  const donutData = appliances.map((a) => ({
+    name: a.appliance_type,
+    value:
+      Math.round(
+        ((a.wattage * a.hours_per_day * a.duty_cycle) / 1000 / totalKwh) * 100,
+      ) || 0,
+    fill: "#09907f",
+  }));
 
-  const handleDelete = (id) => {
-    setAppliances((prev) => prev.filter((a) => a.id !== id));
+  useEffect(() => {
+    const token = localStorage.getItem("ew_token");
+    const headers = { Authorization: `Bearer ${token}` };
+
+    fetch(`${import.meta.env.VITE_API_URL}/appliances`, { headers })
+      .then((r) => r.json())
+      .then((d) => {
+        console.log("appliances:", d);
+        if (d.success) setAppliances(d.data);
+      })
+      .catch(() => {});
+
+    fetch(`${import.meta.env.VITE_API_URL}/dashboard`, { headers })
+      .then((r) => r.json())
+      .then((d) => {
+        if (d.success) setDashData(d.data);
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleDelete = async (id) => {
+    const token = localStorage.getItem("ew_token");
+    try {
+      await fetch(`${import.meta.env.VITE_API_URL}/appliances/${id}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setAppliances((prev) => prev.filter((a) => a.id !== id));
+    } catch {
+      console.error("Failed to delete appliance");
+    }
   };
   return (
     <div className={styles.container}>
@@ -192,27 +234,43 @@ function Appliances() {
           </svg>
           <input placeholder="Search appliances..." />
         </div>
-        <button className={styles.addBtn}>+ Add Appliance</button>
+        <button
+          className={styles.addBtn}
+          onClick={() => navigate("/quicksetup")}
+        >
+          + Add Appliance
+        </button>
       </div>
       <div className={styles.topGrid}>
         {/* Left card */}
         <div className={styles.balanceCard}>
           <p className={styles.balanceLabel}>Available Energy</p>
           <p className={styles.balanceValue}>
-            45.2 <span>kWh</span>
+            {dashData?.available_energy ?? 45.2} <span>kWh</span>
           </p>
           <div className={styles.statsGrid}>
             <div className={styles.statItem}>
               <p className={styles.statLabel}>Estimated Duration</p>
-              <p className={styles.statValue}>6 days</p>
+              <p className={styles.statValue}>
+                {dashData?.estimated_duration_days ?? 6} days
+              </p>
             </div>
             <div className={styles.statItem}>
               <p className={styles.statLabel}>Daily Average</p>
-              <p className={styles.statValue}>7.5 kWh</p>
+              <p className={styles.statValue}>
+                {dashData?.daily_average_kwh ?? 7.5} kWh
+              </p>
             </div>
             <div className={styles.statItem}>
               <p className={styles.statLabel}>Last Purchase</p>
-              <p className={styles.statValue}>Feb 8, 2026</p>
+              <p className={styles.statValue}>
+                {dashData?.last_purchase?.date
+                  ? new Date(dashData.last_purchase.date).toLocaleDateString(
+                      "en-US",
+                      { month: "short", day: "numeric" },
+                    )
+                  : "N/A"}
+              </p>
             </div>
             <div className={styles.statItem}>
               <p className={styles.statLabel}>Next Suggested</p>
@@ -297,13 +355,15 @@ function Appliances() {
               <p className={styles.totalLabel}>Total Daily Consumption</p>
               <p className={styles.totalValue}>20 kWh</p>
 
-              <p className={styles.totalSub}>Across 5 appliances</p>
+              <p className={styles.totalSub}>
+                Across {appliances.length} appliances
+              </p>
             </div>
             <div className={styles.chartRow}>
               <ResponsiveContainer width={225} height={225}>
                 <PieChart>
                   <Pie
-                    data={DONUT_DATA}
+                    data={donutData}
                     cx="50%"
                     cy="50%"
                     innerRadius={52}
@@ -316,7 +376,7 @@ function Appliances() {
                 </PieChart>
               </ResponsiveContainer>
               <div className={styles.legend}>
-                {DONUT_DATA.map(({ name, value, fill }) => (
+                {donutData.map(({ name, value, fill }) => (
                   <div key={name} className={styles.legendItem}>
                     <div className={styles.legendLeft}>
                       <span
@@ -338,7 +398,12 @@ function Appliances() {
       <div className={styles.tableSection}>
         <div className={styles.tableHeader}>
           <h3 className={styles.tableTitle}>All Appliances</h3>
-          <button className={styles.addNewBtn}>+ Add New</button>
+          <button
+            className={styles.addNewBtn}
+            onClick={() => navigate("/quicksetup")}
+          >
+            + Add New
+          </button>
         </div>
         <div className={styles.tableWrapper}>
           {/* Header Row */}
@@ -352,42 +417,44 @@ function Appliances() {
           </div>
 
           {/* Data Rows */}
-          {appliances.map(
-            ({ id, appl, location, specs, usage, contribution, cost }) => (
-              <div key={id} className={styles.row}>
-                <div className={styles.applianceCell}>
-                  <div className={styles.applianceIcon}>
-                    <ApplianceIcon />
-                  </div>
-                  <div className={styles.textBlock}>
-                    <p className={styles.applianceName}>{appl}</p>
-                    <p className={styles.applianceLocation}>{location}</p>
-                  </div>
+          {appliances.map((item, idx) => (
+            <div key={item.id ?? idx} className={styles.row}>
+              <div className={styles.applianceCell}>
+                <div className={styles.applianceIcon}>
+                  <ApplianceIcon />
                 </div>
-
-                <div className={styles.specs}>{specs}</div>
-                <div className={styles.usage}>{usage}</div>
-                <div>
-                  <span className={styles.contributionBadge}>
-                    {contribution}%
-                  </span>
-                </div>
-                <div className={styles.dailyCost}>{cost}</div>
-
-                <div className={styles.actionBtns}>
-                  <button className={styles.editBtn}>
-                    <EditIcon />
-                  </button>
-                  <button
-                    className={styles.deleteBtn}
-                    onClick={() => handleDelete(id)}
-                  >
-                    <DeleteIcon />
-                  </button>
+                <div className={styles.textBlock}>
+                  <p className={styles.applianceName}>{item.appliance_type}</p>
+                  <p className={styles.applianceLocation}>—</p>
                 </div>
               </div>
-            ),
-          )}
+              <div className={styles.specs}>
+                {item.wattage}W · {item.hours_per_day} hrs/day
+              </div>
+              <div className={styles.usage}>
+                {(
+                  (item.wattage * item.hours_per_day * item.duty_cycle) /
+                  1000
+                ).toFixed(1)}{" "}
+                kWh
+              </div>
+              <div>
+                <span className={styles.contributionBadge}>—</span>
+              </div>
+              <div className={styles.dailyCost}>—</div>
+              <div className={styles.actionBtns}>
+                <button className={styles.editBtn}>
+                  <EditIcon />
+                </button>
+                <button
+                  className={styles.deleteBtn}
+                  onClick={() => handleDelete(item.id)}
+                >
+                  <DeleteIcon />
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

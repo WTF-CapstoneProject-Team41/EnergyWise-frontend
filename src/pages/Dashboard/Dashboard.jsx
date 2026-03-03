@@ -272,6 +272,7 @@ export default function Dashboard() {
     fetch(`${import.meta.env.VITE_API_URL}/dashboard`, { headers })
       .then((r) => r.json())
       .then((d) => {
+        console.log("dashboard response:", d);
         if (d.success) setDashData(d.data);
       })
       .catch(() => {});
@@ -280,6 +281,7 @@ export default function Dashboard() {
     fetch(`${import.meta.env.VITE_API_URL}/recommendations`, { headers })
       .then((r) => r.json())
       .then((d) => {
+        console.log("recommendations response:", d);
         if (d.success) setRec(d.data);
       })
       .catch(() => {});
@@ -288,6 +290,7 @@ export default function Dashboard() {
     fetch(`${import.meta.env.VITE_API_URL}/appliances`, { headers })
       .then((r) => r.json())
       .then((d) => {
+        console.log("appliances response:", d);
         if (d.success) setAppliances(d.data);
       })
       .catch(() => {});
@@ -305,26 +308,31 @@ export default function Dashboard() {
         <section className={styles.balanceCard}>
           <div className={styles.balanceLabel}>AVAILABLE ENERGY</div>
           <div className={styles.balanceValue}>
-            {dashData?.available_units ?? 45.2} <span>kWh</span>
+            {dashData?.available_energy ?? 45.2} <span>kWh</span>
           </div>
 
           <div className={styles.balanceStats}>
             <div className={styles.stat}>
               <div className={styles.statLabel}>Estimated Duration</div>
               <div className={styles.statValue}>
-                {dashData?.days_remaining ?? 6} days
+                {dashData?.estimated_duration_days ?? 6} days
               </div>
             </div>
             <div className={styles.stat}>
               <div className={styles.statLabel}>Daily Average</div>
               <div className={styles.statValue}>
-                {dashData?.daily_average ?? 7.5} kWh
+                {dashData?.daily_average_kwh ?? 7.5} kWh
               </div>
             </div>
             <div className={styles.stat}>
               <div className={styles.statLabel}>Last Purchase</div>
               <div className={styles.statValue}>
-                {dashData?.last_purchase ?? "Feb 8"}
+                {dashData?.last_purchase?.date
+                  ? new Date(dashData.last_purchase.date).toLocaleDateString(
+                      "en-US",
+                      { month: "short", day: "numeric" },
+                    )
+                  : "N/A"}
               </div>
             </div>
           </div>

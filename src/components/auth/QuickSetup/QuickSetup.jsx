@@ -118,15 +118,33 @@ const QuickSetup = () => {
     setLoading(true);
 
     try {
-      // TODO: Send to backend
-      // const response = await fetch('YOUR_BACKEND_ENDPOINT/appliances', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer ${localStorage.getItem('token')}`
-      //   },
-      //   body: JSON.stringify({ appliances: selectedAppliances })
-      // });
+      const token = localStorage.getItem("ew_token");
+
+      await Promise.all(
+        selectedAppliances.map(async (appliance) => {
+          const res = await fetch(
+            `${import.meta.env.VITE_API_URL}/appliances`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                appliance_type: appliance.name,
+                wattage: appliance.power,
+                quantity: 1,
+                hours_per_day: appliance.hoursPerDay,
+                duty_cycle: 0.8,
+              }),
+            },
+          );
+          const data = await res.json();
+          console.log("appliance save response:", data);
+          if (!res.ok)
+            throw new Error(data.message || "Failed to save appliance");
+        }),
+      );
 
       console.log("Appliances saved:", selectedAppliances);
       navigate("/dashboard");

@@ -7,20 +7,20 @@ import { useUser } from "../../context/UserContext";
 import { useState, useEffect } from "react";
 import iconMap from "../../utils/iconMap";
 
-const monthlyConsumption = [
-  { m: "Jan", v: 38 },
-  { m: "Feb", v: 22 },
-  { m: "Mar", v: 34 },
-  { m: "Apr", v: 28 },
-  { m: "May", v: 39 },
-  { m: "Jun", v: 22 },
-  { m: "Jul", v: 35 },
-  { m: "Aug", v: 27 },
-  { m: "Sep", v: 40 },
-  { m: "Oct", v: 22 },
-  { m: "Nov", v: 34 },
-  { m: "Dec", v: 28 },
-];
+// const monthlyConsumption = [
+//   { m: "Jan", v: 38 },
+//   { m: "Feb", v: 22 },
+//   { m: "Mar", v: 34 },
+//   { m: "Apr", v: 28 },
+//   { m: "May", v: 39 },
+//   { m: "Jun", v: 22 },
+//   { m: "Jul", v: 35 },
+//   { m: "Aug", v: 27 },
+//   { m: "Sep", v: 40 },
+//   { m: "Oct", v: 22 },
+//   { m: "Nov", v: 34 },
+//   { m: "Dec", v: 28 },
+// ];
 const APPLIANCE_TYPE_TO_KEY = {
   "Air Conditioner": "ac",
   Fridge: "fridge",
@@ -232,6 +232,7 @@ export default function Dashboard() {
   const [dashData, setDashData] = useState(null);
   const [recommendation, setRec] = useState(null);
   const [appliances, setAppliances] = useState([]);
+  const [trendData, setTrendData] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("ew_token");
@@ -243,6 +244,14 @@ export default function Dashboard() {
       .then((d) => {
         console.log("dashboard response:", d);
         if (d.success) setDashData(d.data);
+        // Map monthly_trend to chart format
+        const trend = (d.data.monthly_trend || []).map((t) => ({
+          m: new Date(t.month + "-01").toLocaleString("en-US", {
+            month: "short",
+          }),
+          v: t.monthly_kwh_used,
+        }));
+        setTrendData(trend);
       })
       .catch(() => {});
 
@@ -353,7 +362,7 @@ export default function Dashboard() {
 
           <div className={styles.chartWrap}>
             <ResponsiveContainer width="100%" height={260}>
-              <BarChart data={monthlyConsumption} barCategoryGap="30%">
+              <BarChart data={trendData} barCategoryGap="30%">
                 <XAxis
                   dataKey="m"
                   axisLine={false}

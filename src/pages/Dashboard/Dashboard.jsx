@@ -7,20 +7,6 @@ import { useUser } from "../../context/UserContext";
 import { useState, useEffect } from "react";
 import iconMap from "../../utils/iconMap";
 
-// const monthlyConsumption = [
-//   { m: "Jan", v: 38 },
-//   { m: "Feb", v: 22 },
-//   { m: "Mar", v: 34 },
-//   { m: "Apr", v: 28 },
-//   { m: "May", v: 39 },
-//   { m: "Jun", v: 22 },
-//   { m: "Jul", v: 35 },
-//   { m: "Aug", v: 27 },
-//   { m: "Sep", v: 40 },
-//   { m: "Oct", v: 22 },
-//   { m: "Nov", v: 34 },
-//   { m: "Dec", v: 28 },
-// ];
 const APPLIANCE_TYPE_TO_KEY = {
   "Air Conditioner": "ac",
   Fridge: "fridge",

@@ -139,7 +139,7 @@ function PurchaseHistory() {
             marginTop: "20px",
           }}
         >
-          <ResponsiveContainer width="80%" height={220}>
+          <ResponsiveContainer width="90%" height={220}>
             <LineChart data={CHART_DATA[activeChartFilter]}>
               <XAxis
                 dataKey="label"

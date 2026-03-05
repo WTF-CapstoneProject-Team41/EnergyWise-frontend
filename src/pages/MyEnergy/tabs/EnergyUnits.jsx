@@ -118,7 +118,7 @@ function EnergyUnits() {
             </svg>
           </span>
           <strong>Next Purchase Suggested:</strong>
-          <p className={styles.feb}>
+          <span className={styles.feb}>
             {dashData?.forecast_depletion_date
               ? new Date(dashData.forecast_depletion_date).toLocaleDateString(
                   "en-US",
@@ -128,7 +128,7 @@ function EnergyUnits() {
                   },
                 )
               : "N/A"}
-          </p>
+          </span>
         </p>
         <p className={styles.suggestionText}>
           We recommend purchasing 50 kWh to maintain your current usage pattern.

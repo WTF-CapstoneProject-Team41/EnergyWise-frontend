@@ -6,8 +6,8 @@
 
 .filters {
   display: flex;
-  width: 408px;
-  height: 59px;
+  max-width: 408px;
+  /* height: 59px; */
   padding: 8px 16px;
   justify-content: center;
   align-items: center;
@@ -18,7 +18,7 @@
 }
 .filterBtn {
   display: flex;
-  height: 32px;
+  /* height: 32px; */
   padding: 8px;
   justify-content: center;
   align-items: center;
@@ -55,7 +55,7 @@
 }
 .purchaseItem {
   display: flex;
-  width: 654px;
+  width: 100%;
   height: 80px;
   padding: 0 24px 0 16px;
   align-items: center;
@@ -92,16 +92,19 @@
 
 /* chart */
 .chartSection {
-  width: 824px;
+  width: 100%;
   height: 352px;
   background: #ffffff;
   border-radius: 16px;
+  padding: 20px;
 }
 
 .chartHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-top: 32px;
   margin-right: 24px;
   margin-left: 40px;
@@ -186,4 +189,38 @@
 
 .searchBox input::placeholder {
   color: #6b6d6d;
+}
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .searchBox input {
+    display: none;
+  }
+  .searchBox {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border-radius: 50%;
+    padding: 0;
+    right: 20px;
+  }
+  .topBar {
+    justify-content: stretch;
+  }
+  .filters {
+    width: 100%;
+  }
+
+  .chartHeader {
+    padding: 8px 8px 0;
+    margin: 18px;
+  }
+  .purchaseItem {
+    padding: 12px;
+  }
+  ResponsiveContainer {
+    width: 100%;
+  }
 }

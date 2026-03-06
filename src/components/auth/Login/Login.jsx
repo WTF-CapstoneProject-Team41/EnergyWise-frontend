@@ -91,7 +91,20 @@ const Login = () => {
       fetchWithCache("recommendations", `${BASE}/recommendations`);
       fetchWithCache("forecast", `${BASE}/forecast`);
 
-      navigate("/user-type");
+      const existingUser = JSON.parse(localStorage.getItem("ew_user") || "{}");
+      const existingName = JSON.parse(localStorage.getItem("ew_name") || "{}");
+
+      // User has onboarded if they have a user_type or meter_number saved
+      const hasOnboarded =
+        existingUser?.user_type ||
+        existingUser?.meter_number ||
+        existingName?.firstName;
+
+      if (hasOnboarded) {
+        navigate("/dashboard");
+      } else {
+        navigate("/user-type");
+      }
     } catch (error) {
       setErrors({
         submit: error.message || "Login failed. Please check your credentials.",

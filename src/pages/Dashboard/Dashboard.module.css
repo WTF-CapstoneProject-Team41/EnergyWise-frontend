@@ -354,3 +354,8 @@
     width: 240px;
   }
 }
+@media (max-width: 768px) {
+  .search {
+    display: none;
+  }
+}

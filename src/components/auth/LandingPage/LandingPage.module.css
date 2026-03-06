@@ -549,7 +549,7 @@
 /* FEATURES */
 .features {
   padding: 6rem 2rem;
-  background: white;
+  background: var(--Blue-50, #f5f9ff);
 }
 
 .container {
@@ -558,16 +558,18 @@
 }
 
 .sectionTitle {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #1f2937;
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #111827;
   text-align: center;
   margin: 0 0 1rem 0;
 }
 
 .sectionSubtitle {
-  font-size: 1.125rem;
-  color: #6b7280;
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  color: #4b5563;
   text-align: center;
   margin: 0 0 4rem 0;
 }
@@ -676,8 +678,8 @@
 }
 
 .howItWorks {
-  padding: 6rem 2rem;
-  background: #f9fafb;
+  padding: 5rem 4.2188rem;
+  background: #fff;
 }
 
 .stepsGrid {
@@ -688,10 +690,12 @@
 
 .stepCard {
   background: white;
-  padding: 2.5rem 2rem;
+  padding: 2.125rem 4rem 2.125rem 2.125rem;
   border-radius: 1rem;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  text-align: start;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
   position: relative;
   transition: all 0.3s;
 }
@@ -702,14 +706,19 @@
 }
 
 .stepNumber {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  background: #d1fae5;
-  color: #065f46;
-  border-radius: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.stepNumber1 {
+  color: #fff;
+  background: linear-gradient(135deg, #09907f 0%, #00bba7 100%);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -717,28 +726,88 @@
   font-size: 1.25rem;
 }
 
-.stepIcon {
-  font-size: 3rem;
-  margin: 2rem 0 1.5rem 0;
+.stepIcon1 {
+  background: linear-gradient(135deg, #09907f 0%, #00bba7 100%);
+  opacity: 0.2;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stepNumber2 {
+  background: linear-gradient(135deg, #0046f5 0%, #2b7fff 100%);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.stepIcon2 {
+  background: linear-gradient(135deg, #0046f5 0%, #2b7fff 100%);
+  opacity: 0.2;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stepNumber3 {
+  background: linear-gradient(135deg, #f59e0b 0%, #ff6900 100%);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.stepIcon3 {
+  background: linear-gradient(135deg, #f59e0b 0%, #ff6900 100%);
+  opacity: 0.2;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .stepTitle {
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
-  color: #1f2937;
+  color: #111827;
   margin: 0 0 1rem 0;
 }
 
 .stepDescription {
+  font-family: var(--font-body);
   font-size: 1rem;
-  color: #6b7280;
+  color: #4b5563;
   line-height: 1.6;
   margin: 0;
 }
 
 .technicians {
   padding: 6rem 2rem;
-  background: white;
+  /* background: white; */
 }
 
 .techContent {
@@ -813,20 +882,26 @@
 
 .whyChoose {
   padding: 6rem 2rem;
-  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #f59e0b 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(0, 70, 245, 0.7) 0%,
+    #09907f 19.71%,
+    #09907f 77.88%,
+    var(--Secondary-Color, #f59e0b) 96.15%
+  );
   color: white;
 }
 
 .sectionTitleWhite {
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-size: 2.25rem;
+  font-weight: 700;
   color: white;
   text-align: center;
   margin: 0 0 1rem 0;
 }
 
 .sectionSubtitleWhite {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.9);
   text-align: center;
   margin: 0 0 4rem 0;
@@ -840,10 +915,12 @@
 
 .benefitCard {
   background: rgba(255, 255, 255, 0.15);
+  display: flex;
   backdrop-filter: blur(10px);
-  padding: 2rem 1.5rem;
+  /* padding: 1.25rem; */
+  gap: 0.75rem;
   border-radius: 1rem;
-  text-align: center;
+  align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s;
 }
@@ -856,13 +933,26 @@
 .benefitIcon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
+  margin: 1.25rem 0 1.25rem 1.25rem;
+  color: #09907f;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
-
+.benefitIcon span {
+  font-size: 20px;
+}
 .benefitTitle {
-  font-size: 1rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: white;
-  margin: 0;
   line-height: 1.4;
 }
 
@@ -873,9 +963,10 @@
 }
 
 .ctaTitle {
+  font-family: var(--font-heading);
   font-size: 3rem;
-  font-weight: 800;
-  color: #1f2937;
+  font-weight: 700;
+  color: #111827;
   margin: 0 0 1rem 0;
 }
 
@@ -886,7 +977,7 @@
 }
 
 .ctaButton {
-  background: #10b981;
+  background: var(--secondary-color);
   color: white;
   border: none;
   padding: 1.25rem 3rem;
@@ -899,7 +990,7 @@
 }
 
 .ctaButton:hover {
-  background: #059669;
+  background: #c07c08;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
 }
@@ -911,9 +1002,10 @@
 }
 
 .footer {
-  background: #1e293b;
+  background: #31456e;
   color: white;
   padding: 4rem 2rem 2rem 2rem;
+  font-family: var(--font-body);
 }
 
 .footerContainer {
@@ -923,7 +1015,7 @@
 
 .footerGrid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
   gap: 3rem;
   margin-bottom: 3rem;
 }
@@ -944,13 +1036,14 @@
 
 .footerTagline {
   color: #94a3b8;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   line-height: 1.6;
   margin: 0;
 }
 
 .footerHeading {
   font-size: 1rem;
+  font-family: var(--font-heading);
   font-weight: 600;
   color: white;
   margin: 0;
@@ -977,7 +1070,7 @@
 }
 
 .footerBottom {
-  border-top: 1px solid #334155;
+  border-top: 1px solid #1f2937;
   padding-top: 2rem;
   text-align: center;
   color: #94a3b8;

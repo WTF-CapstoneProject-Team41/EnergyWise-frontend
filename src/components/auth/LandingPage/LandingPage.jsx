@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./LandingPage.module.css";
+import analyticsImg from "../../../assets/analytics.png";
+import energyImg from "../../../assets/energy.png";
+import electricianImg from "../../../assets/electrician.png";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -368,13 +371,53 @@ const LandingPage = () => {
             <div className={styles.featureBlock}>
               <div className={styles.featureImage}>
                 <div className={styles.dashboardPreview}>
-                  {}
-                  <div className={styles.previewCard}>📊 Live Dashboard</div>
+                  <div className={styles.imgWrap}>
+                    <img src={analyticsImg} className={styles.img} />
+                    <div className={styles.tint1} />
+                  </div>
                 </div>
               </div>
               <div className={styles.featureContent}>
-                <div className={styles.featureBadge}>
-                  <span>⚡</span> Real-Time Insights
+                <div className={`${styles.featureBadge} ${styles.badge1}`}>
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                    >
+                      <path
+                        d="M2.5 2.5V15.8333C2.5 16.2754 2.67559 16.6993 2.98816 17.0118C3.30072 17.3244 3.72464 17.5 4.16667 17.5H17.5"
+                        stroke="#09907F"
+                        stroke-width="1.66667"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M15 14.1667V7.5"
+                        stroke="#09907F"
+                        stroke-width="1.66667"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M10.833 14.1665V4.1665"
+                        stroke="#09907F"
+                        stroke-width="1.66667"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M6.66699 14.1665V11.6665"
+                        stroke="#09907F"
+                        stroke-width="1.66667"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>{" "}
+                  Real-Time Insights
                 </div>
                 <h3 className={styles.featureTitle}>
                   Monitor Your Energy Usage Live
@@ -384,7 +427,7 @@ const LandingPage = () => {
                   identify high-usage appliances, and get instant updates on
                   your energy balance.
                 </p>
-                <ul className={styles.featureList}>
+                <ul className={`${styles.featureList} ${styles.feature1}`}>
                   <li>Track energy usage in real-time</li>
                   <li>Appliance-level monitoring</li>
                   <li>Daily, weekly, and monthly trends</li>
@@ -397,8 +440,60 @@ const LandingPage = () => {
               className={`${styles.featureBlock} ${styles.featureBlockReverse}`}
             >
               <div className={styles.featureContent}>
-                <div className={styles.featureBadge}>
-                  <span>🤖</span> AI Scheduling
+                <div className={`${styles.featureBadge} ${styles.badge2}`}>
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                    >
+                      <g clip-path="url(#clip0_1034_4836)">
+                        <path
+                          d="M8.28086 12.9167C8.20647 12.6283 8.05615 12.3651 7.84555 12.1545C7.63494 11.9439 7.37176 11.7936 7.08336 11.7192L1.97086 10.4009C1.88364 10.3761 1.80687 10.3236 1.75221 10.2512C1.69754 10.1789 1.66797 10.0907 1.66797 10C1.66797 9.90937 1.69754 9.82118 1.75221 9.74884C1.80687 9.6765 1.88364 9.62397 1.97086 9.59921L7.08336 8.28004C7.37166 8.20572 7.63477 8.05552 7.84537 7.84508C8.05596 7.63463 8.20634 7.37162 8.28086 7.08338L9.5992 1.97088C9.6237 1.88331 9.67618 1.80616 9.74863 1.75121C9.82108 1.69625 9.90951 1.6665 10.0004 1.6665C10.0914 1.6665 10.1798 1.69625 10.2523 1.75121C10.3247 1.80616 10.3772 1.88331 10.4017 1.97088L11.7192 7.08338C11.7936 7.37177 11.9439 7.63496 12.1545 7.84556C12.3651 8.05616 12.6283 8.20648 12.9167 8.28088L18.0292 9.59838C18.1171 9.62263 18.1946 9.67505 18.2499 9.74761C18.3052 9.82016 18.3351 9.90884 18.3351 10C18.3351 10.0912 18.3052 10.1799 18.2499 10.2525C18.1946 10.325 18.1171 10.3775 18.0292 10.4017L12.9167 11.7192C12.6283 11.7936 12.3651 11.9439 12.1545 12.1545C11.9439 12.3651 11.7936 12.6283 11.7192 12.9167L10.4009 18.0292C10.3764 18.1168 10.3239 18.1939 10.2514 18.2489C10.179 18.3038 10.0905 18.3336 9.99961 18.3336C9.90868 18.3336 9.82025 18.3038 9.7478 18.2489C9.67535 18.1939 9.62287 18.1168 9.59836 18.0292L8.28086 12.9167Z"
+                          stroke="#0046F5"
+                          stroke-width="1.66667"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M16.667 2.5V5.83333"
+                          stroke="#0046F5"
+                          stroke-width="1.66667"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M18.3333 4.1665H15"
+                          stroke="#0046F5"
+                          stroke-width="1.66667"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M3.33301 14.1665V15.8332"
+                          stroke="#0046F5"
+                          stroke-width="1.66667"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                        <path
+                          d="M4.16667 15H2.5"
+                          stroke="#0046F5"
+                          stroke-width="1.66667"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_1034_4836">
+                          <rect width="20" height="20" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </span>{" "}
+                  AI Forecasting
                 </div>
                 <h3 className={styles.featureTitle}>
                   Protect Your Energy Needs
@@ -407,7 +502,7 @@ const LandingPage = () => {
                   Get AI-driven predictions to forecast when your energy will
                   run out and receive unexpected forecasts.
                 </p>
-                <ul className={styles.featureList}>
+                <ul className={`${styles.featureList} ${styles.feature2}`}>
                   <li>Predict your expense forecast</li>
                   <li>Manage your credit limit</li>
                   <li>Get analytics and insights</li>
@@ -417,37 +512,82 @@ const LandingPage = () => {
               <div className={styles.featureImage}>
                 <div className={styles.illustrationPreview}>
                   {}
-                  <div className={styles.previewCard}>🔮 AI Forecasting</div>
+                  <div className={styles.previewCard}>
+                    {" "}
+                    <div className={styles.imgWrap}>
+                      <img src={energyImg} className={styles.img} />
+                      <div className={styles.tint2} />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className={styles.technicians}>
-              <div className={styles.container}>
-                <div className={styles.techContent}>
-                  <div className={styles.techImage}>
-                    {}
-                    <div className={styles.imagePlaceholder}>
-                      🔧 Professional Service
-                    </div>
-                  </div>
-                  <div className={styles.techText}>
-                    <h2 className={styles.techTitle}>
-                      Connect with Verified Technicians
-                    </h2>
-                    <p className={styles.techDescription}>
-                      Access a marketplace of verified electricians, energy
-                      auditors, and installation specialists. Get professional
-                      help when you need it most.
-                    </p>
-                    <ul className={styles.techList}>
-                      <li>Admin-verified credentials</li>
-                      <li>Browse by location and specialty</li>
-                      <li>Read reviews and ratings</li>
-                      <li>Direct contact and booking</li>
-                    </ul>
+            <div className={styles.featureBlock}>
+              <div className={styles.featureImage}>
+                <div className={styles.dashboardPreview}>
+                  <div className={styles.imgWrap}>
+                    <img src={electricianImg} className={styles.img} />
+                    <div className={styles.tint3} />
                   </div>
                 </div>
+              </div>
+              <div className={styles.featureContent}>
+                <div className={`${styles.featureBadge} ${styles.badge3}`}>
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                    >
+                      <path
+                        d="M13.3337 17.5V15.8333C13.3337 14.9493 12.9825 14.1014 12.3573 13.4763C11.7322 12.8512 10.8844 12.5 10.0003 12.5H5.00033C4.11627 12.5 3.26842 12.8512 2.6433 13.4763C2.01818 14.1014 1.66699 14.9493 1.66699 15.8333V17.5"
+                        stroke="#F59E0B"
+                        stroke-width="1.66667"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M7.50033 9.16667C9.34127 9.16667 10.8337 7.67428 10.8337 5.83333C10.8337 3.99238 9.34127 2.5 7.50033 2.5C5.65938 2.5 4.16699 3.99238 4.16699 5.83333C4.16699 7.67428 5.65938 9.16667 7.50033 9.16667Z"
+                        stroke="#F59E0B"
+                        stroke-width="1.66667"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M18.333 17.5001V15.8334C18.3325 15.0948 18.0866 14.3774 17.6341 13.7937C17.1817 13.2099 16.5481 12.793 15.833 12.6084"
+                        stroke="#F59E0B"
+                        stroke-width="1.66667"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M13.333 2.6084C14.05 2.79198 14.6855 3.20898 15.1394 3.79366C15.5932 4.37833 15.8395 5.09742 15.8395 5.83757C15.8395 6.57771 15.5932 7.2968 15.1394 7.88147C14.6855 8.46615 14.05 8.88315 13.333 9.06673"
+                        stroke="#F59E0B"
+                        stroke-width="1.66667"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>{" "}
+                  Expert Support
+                </div>
+                <h3 className={styles.featureTitle}>
+                  Connect with Verified Technicians
+                </h3>
+                <p className={styles.featureDescription}>
+                  Access a marketplace of verified electricians, energy
+                  auditors, and installation specialists. Get professional help
+                  when you need it most.
+                </p>
+                <ul className={`${styles.featureList} ${styles.feature3}`}>
+                  <li>Admin-verified credentials</li>
+                  <li>Browse by location and specialty</li>
+                  <li>Read reviews and ratings</li>
+                  <li>Direct contact and booking</li>
+                </ul>
               </div>
             </div>
           </div>
